@@ -1,17 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-
-
-const Login = (props) => {
-  return (
-    <div>
-        asedasdsad
-    </div>
-  );
-};
-
-export default Login;
-=======
 import "../pages/Login.css"
 const Login = (props) => {
   return (
@@ -31,4 +18,3 @@ const Login = (props) => {
 };
 
 export default Login;
->>>>>>> 60450e3b53d6377f63558a68419320d1ac81f4c4
