@@ -1,0 +1,140 @@
+/* basic stylings ------------------------------------------ */
+.container-register 		{ 
+  font-family:'Roboto';
+  margin:30px auto 0; 
+  display:block; 
+  background:#FFF;
+}
+
+h2 small { 
+  font-weight:normal; 
+  color:#888; 
+  display:block; 
+}
+
+/* form starting stylings ------------------------------- */
+.group-register 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+.input-register				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:400px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+.input-register:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+.label-registrar				 {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.input-register:focus ~ label, .input-register:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar-register 	{ position:relative; display:block; width:300px; }
+.bar-register:before, .bar-register:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar-register:before {
+  left:50%;
+}
+.bar-register:after {
+  right:50%; 
+}
+
+/* active state */
+.input-register:focus ~ .bar-register:before, .input-register:focus ~ .bar-register:after {
+  width:80%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight-register {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+.input-register:focus ~ .highlight-register {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+
+.label-registrar-textarea{
+    color:#999; 
+    font-size:18px;
+  font-weight:normal;
+}
+textarea {
+  margin-top: 10px;
+  width: 400px;
+  height: 150px;
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
+  border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+  border-image: none;
+  border-radius: 6px 6px 6px 6px;
+  border-style: none solid solid none;
+  border-width: medium 1px 1px medium;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+  color: #555555;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1em;
+  line-height: 1.4em;
+  padding: 5px 8px;
+  transition: background-color 0.2s ease 0s;
+}
+
+
+textarea:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}
