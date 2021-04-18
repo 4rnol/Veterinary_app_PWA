@@ -14,7 +14,15 @@ const RegistrarPublicacion = () => {
 
         {/* <div className="group-register"> */}
         <label className="label-registrar-textarea">Ingrese descripcion de la publicacion</label>
-        <textarea  rows="20" name="comment[text]" id="comment_text" cols="40" className="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+        <textarea  
+          rows="20" 
+          name="comment[text]" 
+          id="comment_text" 
+          cols="40" 
+          className="ui-autocomplete-input"           
+          aria-autocomplete="list" 
+          aria-haspopup="true" 
+        />
           {/* <span className="highlight-register"></span>
           <span className="bar-register"></span>
           <label>Ingrese descripcion de la publicacion</label>
