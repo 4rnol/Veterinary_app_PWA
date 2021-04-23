@@ -13,7 +13,7 @@ const Login = (props) => {
           <label htmlFor="password">Contraseña</label>
           <input type="password" placeholder="Ingrese Contraseña"/>
           <input type="submit" value="Ingresar"/>  
-          <a href="#">No tienes cuenta Registrate</a>
+          <a href="">No tienes cuenta Registrate</a>
       </div>
     </div>
    );
