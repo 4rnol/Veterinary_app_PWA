@@ -44,9 +44,7 @@
    width: 40px;
    height: 32px;
    position: absolute;
-   top: -7px;
-   left: -5px;
-   
+  
    cursor: pointer;
    
    opacity: 0; /* hide this */
@@ -141,7 +139,7 @@
  
  #menu li
  {
-   padding: 10px 0;
+   padding: 0px 0;
    font-size: 22px;
  }
  
