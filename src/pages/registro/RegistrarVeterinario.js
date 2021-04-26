@@ -26,8 +26,11 @@ const RegistrarVeterinario = (props) => {
       <div id="scroll">       
         <h1>Registrar Veterinaria</h1>        
           <br />
-          <label htmlFor="username">Nombre Veterinaria</label>
+          <label htmlFor="username">Nombre</label>
           <input type="text" placeholder="Ingrese Nombre" />
+         <br />
+         <label htmlFor="username">Apellido</label>
+          <input type="text" placeholder="Ingrese Apellido" />
          <br />
           <label htmlFor="email">Correo Electronico</label>
           <input type="text" placeholder="Ingrese Correo"/>
@@ -35,23 +38,17 @@ const RegistrarVeterinario = (props) => {
           <label htmlFor="phone">Telefono</label>
           <input type="text" placeholder="Ingrese Numero"/>
           <br />
+          <label htmlFor="password">Contraseña</label>
+          <input type="password" placeholder="Ingrese contraseña" />
+         <br />
+         <label htmlFor="password">Contraseña</label>
+          <input type="password" placeholder="Confirmar Contraseña" />
+         <br />
+         <label htmlFor="username">Veterinaria</label>
+          <input type="text" placeholder="Ingrese Veterinaria" />
+         <br />
           <label htmlFor="direction">Direccion</label>
           <input type="text" placeholder="Ingrese Direccion"/>
-          <br />
-          <label htmlFor="direction">Direccion</label>
-          <input type="text" placeholder="Ingrese Direccion"/>
-          <br />
-          <label htmlFor="description">Descripcion</label>
-          <input type="text" placeholder="Ingrese Descripcion"/>
-          <br />
-          <label htmlFor="specialty">Especialidad</label>
-          <input type="text" placeholder="Ingrese Especialidad"/>
-          <br />
-          <label htmlFor="username">Facebook</label>
-          <input type="text" placeholder="Ingrese Facebook"/>
-          <br />
-          <label htmlFor="username">WhatsApp</label>
-          <input type="text" placeholder="Ingrese WhatsApp"/>
           <label htmlFor="username">Agregar Imagen</label>
           <input type="file" placeholder="Ingrese imagen" onChange={({target})=>handleFileChange(target.files[0])}/>
 

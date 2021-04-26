@@ -1,139 +1,84 @@
-/* basic stylings ------------------------------------------ */
-.container-register 		{ 
-  font-family:'Roboto';
-  display:block; 
-  background:#FFF;
+.registrar-section{
+  margin: 0;
+  padding: 0;
+  background: url(../../assets/perrit.png) no-repeat center top;
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;
 }
-
-h2 small { 
-  font-weight:normal; 
-  color:#888; 
-  display:block; 
+.registrar-box{
+  background-size: cover;
+width: 370px;
+height: 650px;
+background: #000;
+color: #fff;
+top: 50%;
+left: 50%;
+position: absolute;
+transform: translate(-50%, -50%);
+box-sizing: border-box;
+padding: 70px 30px;
 }
-
-/* form starting stylings ------------------------------- */
-.group-register 			  { 
-  position:relative; 
-  margin-bottom:45px; 
+#scroll{ 
+  border:transparent;
+  height:520px; 
+  width:320px; 
+  overflow-y:scroll; 
+  overflow-x:hidden;
 }
-.input-register				{
-  font-size:18px;
-  padding:10px 10px 10px 5px;
-  display:block;
-  width:400px;
-  border:none;
-  border-bottom:1px solid #757575;
+.registrar-box h1{
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
 }
-.input-register:focus 		{ outline:none; }
-
-/* LABEL ======================================= */
-.label-registrar				 {
-  color:#999; 
-  font-size:18px;
-  font-weight:normal;
-  position:absolute;
-  pointer-events:none;
-  left:5px;
-  top:10px;
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
+.registrar-box label {
+  margin :0;
+  padding:0 0 20px ;
+  text-align: center;
+  font-size: 22px;
 }
-
-/* active state */
-.input-register:focus ~ label, .input-register:valid ~ label 		{
-  top:-20px;
-  font-size:14px;
-  color:#5264AE;
+.registrar-box input{ 
+  width: 100%;
+  margin-bottom: 20px;
 }
-
-/* BOTTOM BARS ================================= */
-.bar-register 	{ position:relative; display:block; width:300px; }
-.bar-register:before, .bar-register:after 	{
-  content:'';
-  height:2px; 
-  width:0;
-  bottom:1px; 
-  position:absolute;
-  background:#5264AE; 
-  transition:0.2s ease all; 
-  -moz-transition:0.2s ease all; 
-  -webkit-transition:0.2s ease all;
-}
-.bar-register:before {
-  left:50%;
-}
-.bar-register:after {
-  right:50%; 
-}
-
-/* active state */
-.input-register:focus ~ .bar-register:before, .input-register:focus ~ .bar-register:after {
-  width:80%;
-}
-
-/* HIGHLIGHTER ================================== */
-.highlight-register {
-  position:absolute;
-  height:60%; 
-  width:100px; 
-  top:25%; 
-  left:0;
-  pointer-events:none;
-  opacity:0.5;
-}
-
-/* active state */
-.input-register:focus ~ .highlight-register {
-  -webkit-animation:inputHighlighter 0.3s ease;
-  -moz-animation:inputHighlighter 0.3s ease;
-  animation:inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@-moz-keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-@keyframes inputHighlighter {
-	from { background:#5264AE; }
-  to 	{ width:0; background:transparent; }
-}
-
-.label-registrar-textarea{
-    color:#999; 
-    font-size:18px;
-  font-weight:normal;
+.registrar-box button[type="submit"]{
+  border: none ;
+  outline: none;
+  height: 40px;
+  background: #b80f22;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+  width: 100%;
+  margin-bottom: 20px
 }
 textarea {
-  margin-top: 10px;
-  width: 400px;
-  height: 150px;
-  -moz-border-bottom-colors: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
+  width: 310px;
+  height: 100px;
   -moz-border-top-colors: none;
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.07);
-  border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
-  border-image: none;
-  border-radius: 6px 6px 6px 6px;
-  border-style: none solid solid none;
-  border-width: medium 1px 1px medium;
+  border-color: -moz-use-text-color #0e0d0d #0e0d0d -moz-use-text-color;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-  color: #555555;
+  color: #0e0d0d;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 1em;
   line-height: 1.4em;
   padding: 5px 8px;
-  transition: background-color 0.2s ease 0s;
 }
-
-
-textarea:focus {
-    background: none repeat scroll 0 0 #FFFFFF;
-    outline-width: 0;
+.registrar-box input[type="text"]{
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+.registrar-box select{
+  max-width: 250px;
+	position: relative;
+  color:#0e0d0d;
+  border: solid #f6f6f8 10px;
+  font-size: 1em;   
+   font-family : verdana,arial,helveti
 }
