@@ -4,7 +4,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Login from '../pages/Login';
 import Navbar from '../components/appBar/NavBar';
 import registerPublication from '../pages/publicaciones/RegistrarPublicacion';
-import registerVeterinary from '../pages/registro/RegistrarVeterinario'
+import registerVeterinary from '../pages/registro/RegistrarVeterinario';
+import infoVeterinary from '../pages/InformacionVeterinario/infoVeterinario';
 const RouterMain = (props) => {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ const RouterMain = (props) => {
       <Route exact={true} path={routes.login} component={Login} />
       <Route exact={true} path={routes.registerPublication} component={registerPublication} />
       <Route exact={true} path={routes.registerVeterinary} component={registerVeterinary} />
+      <Route exact={true} path={routes.infoVeterinary} component={infoVeterinary} />
     </BrowserRouter>
   );
 };

@@ -4,5 +4,6 @@ export const routes ={
     registerPublication:'/registerPublication',
     registerVeterinary:'/registerVeterinary',
     publications:'/publications',
-    route404: '/404',
+    infoVeterinary:'/infoVeterinary',
+    route404: '/404'
 };
