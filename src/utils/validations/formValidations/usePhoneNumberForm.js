@@ -7,7 +7,7 @@ import {
   ciRegex,
   nameMateriaRegex,
   ciComplementoRegex
-} from '../regexs';
+} from '../../../constants/regex';
 import {
   sLimitNumber,
   sLimitCharacters,
@@ -23,7 +23,7 @@ import {
   sMustBeGreaterThanNumbers,
   sNumbersMinimum,
   sLimitNumber1, sOnlyLettersAreAllowed
-} from '../strings';
+} from '../../../constants/strings';
 
 export const usePhone = () => {
     const [values, setValues] = useState('');
@@ -33,10 +33,10 @@ export const usePhone = () => {
       if (!phoneRegex.test(value)) {
         setPhoneErrorMessage(sOnlyNumbersAreAllowed);
         setPhoneError(true);
-      } else if (value.length < 7) {
+      } else if (value.length < 6) {
         setPhoneErrorMessage(sNumbersMinimum.replace('{0}', 7));
         setPhoneError(true);
-      } else if (value.length >= 9) {
+      } else if (value.length >= 7) {
         setPhoneErrorMessage(sLimitNumber);
         setPhoneError(true);
       } else {

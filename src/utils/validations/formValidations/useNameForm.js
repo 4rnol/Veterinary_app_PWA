@@ -7,7 +7,8 @@ import {
   ciRegex,
   nameMateriaRegex,
   ciComplementoRegex
-} from '../regexs';
+} from '../../../constants/regex';
+
 import {
   sLimitNumber,
   sLimitCharacters,
@@ -23,9 +24,9 @@ import {
   sMustBeGreaterThanNumbers,
   sNumbersMinimum,
   sLimitNumber1, sOnlyLettersAreAllowed
-} from '../strings';
+} from '../../../constants/strings';
 
-export const useFullName = () => {
+export const useFullName = (minLength,maxLength) => {
     const [values, setValues] = useState('');
     const [fullNameError, setFullNameError] = useState(false);
     const [fullNameMesasge, setFullNameErrorMessage] = useState(null);
@@ -36,10 +37,10 @@ export const useFullName = () => {
       } else if (!nameRegex.test(value)) {
         setFullNameErrorMessage(sOnlyLettersAreAccepted);
         setFullNameError(true);
-      } else if (value.length > 0 && value.length <= 2) {
+      } else if (value.length > 0 && value.length <= minLength) {
         setFullNameErrorMessage(sNameMustHaveMoreThan2Characters);
         setFullNameError(true);
-      } else if (value.length > 24) {
+      } else if (value.length > maxLength) {
         setFullNameErrorMessage(sCharacterLimit25);
         setFullNameError(true);
       } else {

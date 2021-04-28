@@ -7,7 +7,7 @@ import {
   ciRegex,
   nameMateriaRegex,
   ciComplementoRegex
-} from '../regexs';
+} from '../../../constants/regex';
 import {
   sLimitNumber,
   sLimitCharacters,
@@ -23,7 +23,7 @@ import {
   sMustBeGreaterThanNumbers,
   sNumbersMinimum,
   sLimitNumber1, sOnlyLettersAreAllowed
-} from '../strings';
+} from '../../../constants/strings';
 
 export const useEmail = () => {
     const [values, setValues] = useState('');

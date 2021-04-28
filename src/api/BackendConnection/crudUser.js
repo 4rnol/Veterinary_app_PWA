@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { baseUrl } from './Keys';
 
-class BackendConnection {
+class CrudUser {
 //   getUsers() {
 //     return new Promise((resolve, reject) => {
 //       axios({
@@ -14,4 +14,4 @@ class BackendConnection {
 //   }
 }
 
-export default new BackendConnection();
+export default new CrudUser();

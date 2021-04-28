@@ -7,7 +7,7 @@ import {
   ciRegex,
   nameMateriaRegex,
   ciComplementoRegex
-} from '../regexs';
+} from '../../../constants/regex';
 import {
   sLimitNumber,
   sLimitCharacters,
@@ -23,7 +23,7 @@ import {
   sMustBeGreaterThanNumbers,
   sNumbersMinimum,
   sLimitNumber1, sOnlyLettersAreAllowed
-} from '../strings';
+} from '../../../constants/strings';
 
 
 export const usePassword = () => {
@@ -32,7 +32,7 @@ export const usePassword = () => {
     const [passMessage, setPassMessage] = useState('');
   
     const handlePassChange = (value) => {
-      if (values.length > 29) {
+      if (values.length > 25) {
         setPassMessage(sLimitCharacters);
         setPasswordError(true);
       } else {
