@@ -36,7 +36,7 @@
   width: 100%;
   margin-bottom: 20px;
 }
-.login-box input[type="text"], .login-box input[type="password"]{
+.login-box input[type="password"], .login-box input[type="email"]{
   border: none;
   border-bottom: 1px solid #fff;
   background: transparent;
@@ -45,10 +45,12 @@
   color: #fff;
   font-size: 16px;
 }
-.login-box input[type="submit"]{
-  border: none ;
+
+.login-box input[type=submit], button {
+  border: none;
   outline: none;
   height: 40px;
+  width: 260px;
   background: #b80f22;
   color: #fff;
   font-size: 18px;

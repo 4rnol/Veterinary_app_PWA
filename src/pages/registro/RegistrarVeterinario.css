@@ -53,11 +53,11 @@
     width: 100%;
     margin-bottom: 20px
   }
-.register-box input[type="text"],input[type="email"],input[type="number"]{
+.register-box input[type="text"],.register-box input[type="email"],.register-box input[type="number"]{
     border: none;
     border-bottom: 1px solid #fff;
     background: transparent;
-    outline: none;
+    outline: none; 
     height: 40px;
     color: #fff;
     font-size: 16px;
