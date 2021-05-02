@@ -75,7 +75,6 @@ const RegistrarVeterinario = (props) => {
               className="input-registrarVeterinario"
               placeholder="Ingrese Apellido"
               required
-              pattern="[A-Z a-z]+"
               minLength="3"
               maxLength="25"
               onChange={({target})=>handleLastNameChange(target.value)}
