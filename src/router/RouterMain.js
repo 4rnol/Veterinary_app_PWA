@@ -6,15 +6,19 @@ import Navbar from '../components/appBar/NavBar';
 import registerPublication from '../pages/publicaciones/RegistrarPublicacion';
 import registerVeterinary from '../pages/registro/RegistrarVeterinario';
 import infoVeterinary from '../pages/InformacionVeterinario/infoVeterinario';
+import {PrivateRoute} from '../constants/PrivateRoute';
+
 const RouterMain = (props) => {
+
+  const isAuth=false;
   return (
     <BrowserRouter>
       <Navbar />
-      <Route exact={true} path={"/"} component={""} />
+      <Route exact={true} path={routes.home} component={""} />
       <Route exact={true} path={routes.login} component={Login} />
-      <Route exact={true} path={routes.registerPublication} component={registerPublication} />
       <Route exact={true} path={routes.registerVeterinary} component={registerVeterinary} />
-      <Route exact={true} path={routes.infoVeterinary} component={infoVeterinary} />
+      <PrivateRoute isAuth={isAuth} exact={true} path={routes.registerPublication} component={registerPublication} />
+      <PrivateRoute isAuth={isAuth} exact={true} path={routes.infoVeterinary} component={infoVeterinary} />
     </BrowserRouter>
   );
 };

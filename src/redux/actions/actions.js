@@ -1,0 +1,2 @@
+export const CLEAN_ALL_REDUCERS ='CLEAN_ALL_REDUCERS';
+export const CHANGE_USER = 'CHANGE_USER';

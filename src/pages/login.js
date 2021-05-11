@@ -2,24 +2,53 @@ import * as React from "react";
 import "./Login.css";
 import {routes} from '../router/RoutesConstants';
 import login from '../api/BackendConnection/Login';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { changeUser } from '../redux/actions/index.actions';
+import {sEmailOrPasswordIncorrects,sSomethingWentWrong} from '../constants/strings';
 
 const {useState,useEffect}=React;
 
 const Login = (props) => {
+  const [checked, setChecked] = useState(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState('');
+  const [show, setShow] = useState(false);
 
   const [ email,handleEmail ]= useState("");
   const [ pas,handlePassword ]= useState("");
 
-  const signIn=(e)=>{
-    e.preventDefault();
-    login.login(email,pas).then(res=>{
-      console.log(res);
-    }).catch(err=>{
-      console.log(err);
-      const email = document.getElementById("email");
-      email.setCustomValidity("Cuenta no encontrada");
-    })
+  const e = sessionStorage.getItem('email');
+  const p = sessionStorage.getItem('password');
+
+  if (e !== null && p !== null) {
+    login.login(e,p).then((data) => {
+      props.changeUser(data.account);
+      props.history.push(routes.forosList);
+    });
   }
+
+    const signIn = (e) => {
+    e.preventDefault();
+    login.login(email,pas)
+      .then((data) => {
+        if (data.status === 'Success') {
+          props.changeUser(data.account);
+          if (checked) {
+            sessionStorage.setItem('email', email);
+            sessionStorage.setItem('password', pas);
+          }
+          props.history.push(routes.home);
+        } else {
+          setLoginErrorMsg(sEmailOrPasswordIncorrects);
+          setShow(true);
+        }
+      })
+      .catch((err) => {
+        setLoginErrorMsg(sSomethingWentWrong);
+        setShow(true);
+        console.warn(err);
+      });
+  };
 
   return (
     <div className="login-section">
@@ -40,5 +69,14 @@ const Login = (props) => {
     </div>
    );
 };
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
+};
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  changeUser: (user) => dispatch(changeUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
