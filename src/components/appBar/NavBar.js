@@ -1,14 +1,21 @@
 import * as React from 'react';
 import {Navbar,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 import { Router, withRouter } from 'react-router-dom';
-import {routes} from '../../router/RoutesConstants'
-
+import {routes} from '../../router/RoutesConstants';
 import './NavBar.css';
+
+const {useState,useEffect} = React;
+
 const NavBar =(props)=>{
+  const[menuChecked,setMenuChecked]=useState(false);
+  const handleChecked=()=>{
+    setMenuChecked(Prev=>!Prev);
+  };
     return (
       <div role="navigation" className='navbar container-fluid'>
         <div id="menuToggle">          
-          <input type="checkbox" />   
+          <input type="checkbox" checked={menuChecked} onChange={()=>handleChecked()} />   
           <span></span>
           <span></span>     
           <span></span>

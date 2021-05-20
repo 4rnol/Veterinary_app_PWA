@@ -28,7 +28,7 @@ class CrudVeterinary {
                 password:password,
             }
           })
-            .then((response) => resolve(response.data))
+            .then((response) => resolve(response))
             .catch((e) => reject(e));
         });
       }

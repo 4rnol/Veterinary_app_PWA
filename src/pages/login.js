@@ -31,12 +31,10 @@ const Login = (props) => {
     e.preventDefault();
     login.login(email,pas)
       .then((data) => {
-        if (data.status === 'Success') {
-          props.changeUser(data.account);
-          if (checked) {
-            sessionStorage.setItem('email', email);
-            sessionStorage.setItem('password', pas);
-          }
+        if (data) {
+          props.changeUser(data.veterinary);
+          sessionStorage.setItem('email', email);
+          sessionStorage.setItem('password', pas);
           props.history.push(routes.home);
         } else {
           setLoginErrorMsg(sEmailOrPasswordIncorrects);

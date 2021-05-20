@@ -26,7 +26,7 @@ const RegistrarVeterinario = (props) => {
   const registrar = (e) => {
     e.preventDefault();
     if(password===passwordConfirm){
-    const storageRef = projectStorage.ref(file.name);
+    const storageRef = projectStorage.ref(`Veterinary/${file.name}`);
     storageRef.put(file).on(
       'state_changed',
       () => {},
@@ -35,6 +35,7 @@ const RegistrarVeterinario = (props) => {
       },
       async () => {
         await storageRef.getDownloadURL().then((url) => {
+          console.log(usrName,lastName,veterinary,email,phone,direccion,url,password);
           CrudVeterinary.createVeterinary(usrName,lastName,veterinary,email,phone,direccion,url,password)
           .then(resp=>{
             console.log(resp)
