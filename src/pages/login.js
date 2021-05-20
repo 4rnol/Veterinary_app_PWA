@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changeUser } from '../redux/actions/index.actions';
 import {sEmailOrPasswordIncorrects,sSomethingWentWrong} from '../constants/strings';
+import img from '../assets/Dopi.jpg';
 
 const {useState,useEffect}=React;
 
@@ -31,7 +32,8 @@ const Login = (props) => {
     e.preventDefault();
     login.login(email,pas)
       .then((data) => {
-        if (data.status === 'Success') {
+        console.log(data);
+        if (data) {
           props.changeUser(data.account);
           if (checked) {
             sessionStorage.setItem('email', email);
@@ -52,6 +54,7 @@ const Login = (props) => {
 
   return (
     <div className="login-section">
+    <img className="img-detras" src={img}></img>
      <div className="login-box">
        
         <h1>Login</h1>        

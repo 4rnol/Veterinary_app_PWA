@@ -11,6 +11,7 @@ import { usePassword as usePassConfirm } from '../../utils/validations/formValid
 import { usePhone } from '../../utils/validations/formValidations/usePhoneNumberForm';
 import CrudVeterinary from '../../api/BackendConnection/CrudVeterinary';
 import {useEmail} from '../../utils/validations/formValidations/useEmailForm';
+import img from '../../assets/Dopi.jpg';
 
 const RegistrarVeterinario = (props) => {
   const [file, handleFileChange, fileError, setFileError, fileMessage, setFileMessage, previewSource] = useFiles();
@@ -52,6 +53,7 @@ const RegistrarVeterinario = (props) => {
   };
   return (
     <div className="register-section">
+      <img className="img-detras" src={img}></img>
       <div className="register-box">
         <div id="scroll">
           <h1>Registrar Veterinaria</h1>

@@ -1,7 +1,7 @@
 .registrar-section{
   margin: 0;
   padding: 0;
-  background: url(../../assets/perrit.png) no-repeat center top;
+  /* background: url(../../assets/perrit.png) no-repeat center top; */
   background-size: cover;
   font-family: sans-serif;
   height: 100vh;
@@ -46,7 +46,7 @@ padding: 70px 30px;
   border: none ;
   outline: none;
   height: 40px;
-  background: #b80f22;
+  background: #FFA706;
   color: #fff;
   font-size: 18px;
   border-radius: 20px;
