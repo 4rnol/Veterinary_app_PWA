@@ -23,7 +23,7 @@ const Publicaciones = () => {
     return (
        <div className="containerPublications">
             <div id="btns-grupo" className="relleno"></div>
-            <img className="img-detras" src={img}></img>
+            <img className="img-detras" src={img} alt=""/>
             <div className="btn-grupo">
                 <button className= "btn-personalizado" onClick={()=>{setUrl("/category/nutritional/care"); setActualiza(!actualiza);}}>Alimentación</button>
                 <button className= "btn-personalizado" onClick={()=>{setUrl("/category/diseases"); setActualiza(!actualiza);}}>Enfermedades</button>
@@ -43,4 +43,4 @@ const Publicaciones = () => {
     )
 }
 
-export default Publicaciones
+export default Publicaciones;
