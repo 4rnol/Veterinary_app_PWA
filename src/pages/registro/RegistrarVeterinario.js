@@ -36,6 +36,7 @@ const RegistrarVeterinario = (props) => {
       },
       async () => {
         await storageRef.getDownloadURL().then((url) => {
+          console.log(usrName,lastName,veterinary,email,phone,direccion,url,password);
           CrudVeterinary.createVeterinary(usrName,lastName,veterinary,email,phone,direccion,url,password)
           .then(resp=>{
             console.log(resp)
