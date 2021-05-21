@@ -21,9 +21,9 @@ const NavBar =(props)=>{
             <hr />
             <Nav.Link onClick={()=>props.history.push(routes.registerVeterinary)}><li>Registrar veterinaria</li></Nav.Link>
             <hr />
-            <Nav.Link onClick={()=>props.history.push(routes.login)}><li>Account</li></Nav.Link>
+            <Nav.Link onClick={()=>props.history.push(routes.login)}><li>Salir</li></Nav.Link>
             <hr />
-            <Nav.Link onClick={()=>props.history.push(routes.login)}><li>Login</li></Nav.Link>
+            <Nav.Link onClick={()=>props.history.push(routes.login)}><li>Iniciar sesión</li></Nav.Link>
           </ul>
         </div>
         <div className="title">

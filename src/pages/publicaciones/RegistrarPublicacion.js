@@ -2,6 +2,7 @@ import * as React from 'react';
 import './RegistrarPublicacion.css';
 import {useFiles} from '../../utils/validations/formValidations/useFiles';
 import {projectStorage} from '../../api/Firebase/config';
+import img from '../../assets/Dopi.jpg'
 
 const RegistrarPublicacion = () => {
   const[file,handleFileChange,fileError,
@@ -21,6 +22,7 @@ const RegistrarPublicacion = () => {
   };
   return (
     <div className="registrar-section">
+      <img className="img-detras" src={img} alt=""/>
      <div className="registrar-box">
      <div id="scroll"> 
         <h1>Registrar Publicacion</h1>        
