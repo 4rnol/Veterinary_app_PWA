@@ -7,10 +7,14 @@
  * If you are thinking of using this in
  * production code, beware of the browser
  * prefixes.
+ .color{
+  color:#73F89B;
+  background-color: #C0CCDA;
+}
  */
 
 .navbar{
-  background-color: red;
+  background-color: #278699;
   position: fixed;
   z-index: 100;
 }
@@ -49,12 +53,9 @@
    width: 40px;
    height: 32px;
    position: absolute;
-  
    cursor: pointer;
-   
    opacity: 0; /* hide this */
    z-index: 2; /* and place it over the hamburger */
-   
    -webkit-touch-callout: none;
  }
  
@@ -69,7 +70,7 @@
    margin-bottom: 5px;
    position: relative;
    
-   background: #cdcdcd;
+   background: #ffff;
    border-radius: 3px;
    
    z-index: 1;
@@ -155,9 +156,13 @@
  {
    transform: none;
  }
-
+ .title{
+   width: 100%;
+   display: flex;
+ }
  .title-nav{
     padding-top: 1rem;
     padding-left: 4rem;
     font-size: 25px;
+    color: #ffff;
  }

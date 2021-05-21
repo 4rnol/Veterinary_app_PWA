@@ -15,7 +15,11 @@ const NavBar =(props)=>{
     return (
       <div role="navigation" className='navbar container-fluid'>
         <div id="menuToggle">          
+<<<<<<< HEAD
           <input type="checkbox" checked={menuChecked} onChange={()=>handleChecked()} />   
+=======
+          <input className="check" type="checkbox" />   
+>>>>>>> 16273652fb914a8fd89c07031955e9c6e5a018af
           <span></span>
           <span></span>     
           <span></span>
@@ -33,7 +37,9 @@ const NavBar =(props)=>{
             <Nav.Link onClick={()=>props.history.push(routes.login)}><li>Login</li></Nav.Link>
           </ul>
         </div>
-        <h3 className="title-nav">Mi Veterinaria</h3>
+        <div className="title">
+            <h3 className="title-nav">Mi Veterinaria</h3>
+        </div>
     </div>
   );
 }
