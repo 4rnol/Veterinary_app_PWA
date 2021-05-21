@@ -12,17 +12,18 @@ import { connect } from "react-redux";
 
 const RouterMain = (props) => {
   const { user } = props.userReducer;
-  let isAuth = user !== null;
+  const e = sessionStorage.getItem('email');
+  const p = sessionStorage.getItem('password');
+  const isAuth = (e !== null && p !== null) || user != null;
+
   
   return (
     <BrowserRouter>
-      
-
-      {isAuth  && <Navbar />}
+      <Navbar isAuth={isAuth} />
       <Route exact={true} path={'/'} component={Login} />
       <Route exact={true} path={routes.login} component={Login} />
       <Route exact={true} path={routes.registerVeterinary} component={registerVeterinary} />
-      <PrivateRoute isAuth={isAuth} exact={true} path={routes.publications} component={Publicaciones} />
+      <Route exact={true} path={routes.publications} component={Publicaciones} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.registerPublication} component={registerPublication} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.infoVeterinary} component={infoVeterinary} />
     </BrowserRouter>
