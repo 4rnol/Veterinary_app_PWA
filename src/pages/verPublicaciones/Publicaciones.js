@@ -36,7 +36,7 @@ const Publicaciones = () => {
                     )
                 })
             }
-            <a href="#btns-grupo" class="btn-flotante-btn">
+            <a href="#btns-grupo" className="btn-flotante-btn">
                 <button className="btn-button-flot" onClick={()=>{setUrl(""); setActualiza(!actualiza);}}>Todo</button>
             </a>
        </div>
