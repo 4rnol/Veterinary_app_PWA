@@ -30,7 +30,7 @@ export const useFiles=()=>{
     const [fileError,setFileError] = useState(false);
   
     const [fileMessage,setFileMessage] = useState("");
-    const [previewSource,setPreviewSource]=useState(null);
+    const [previewSource,setPreviewSource]=useState("");
   
     const preViewFile=(file)=>{
       const reader=new FileReader();

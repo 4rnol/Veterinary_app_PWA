@@ -160,7 +160,9 @@ const RegistrarVeterinario = (props) => {
               onChange={({ target }) => handleFileChange(target.files[0])}
             />
 
-            <iframe desciption="iframe" data="application" src={previewSource} />
+            {
+              previewSource !=="" && <img href="img" alt="" src={previewSource} width='100%' height="220px"/>
+            }
             <button type="submit">Registrar</button>
           </form>
         </div>
