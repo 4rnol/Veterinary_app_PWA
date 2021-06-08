@@ -8,7 +8,7 @@ import registerVeterinary from '../pages/registro/RegistrarVeterinario';
 import infoVeterinary from '../pages/InformacionVeterinario/infoVeterinario';
 import {PrivateRoute} from '../constants/PrivateRoute';
 import Publicaciones from '../pages/verPublicaciones/Publicaciones';
-import publication from '../pages/verPubli/verpubli';
+import publication from '../pages/verPubli/Verpubli';
 import { connect } from "react-redux";
 
 const RouterMain = (props) => {

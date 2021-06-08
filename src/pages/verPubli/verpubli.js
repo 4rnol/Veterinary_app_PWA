@@ -1,36 +1,55 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import "./verpubli.css";
 import img from "../../assets/Dopi.jpg";
+import {getPublication} from "../../api/BackendConnection/servicePublications"
+import { useParams } from "react-router";
+const Verpubli = (props) => {
+    let { id } = useParams();
+    console.log(id); 
+    const [publication, setPublication] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getPublication(id);
+                console.log(response);
+                setPublication(response);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    },[])
+    const Publication =()=>{
+        return (
+            <div className="seccion-perfil-usuario">
+             <img className="img-detras" src={img} alt=""/>  
+       <div className="perfil-usuario-header">
+           <div className="perfil-usuario-portada">   
+                   <img className="img-perfil" src={publication.urlFoto} alt="img-avatar"></img>        
+           </div>
+       </div>
+       <div className="perfil-usuario-body">
+           <div className="perfil-usuario-bio">
+               <h3 className="titulo">{publication.title}</h3>
+               <p className="texto">{publication.description}</p>
+           </div>
+           <div className="perfil-usuario-footer">
+               <ul className="lista-datos">
+                   <li> Direccion:</li>
+                   <p className="texto">{publication.veterinary.direction}</p>
+                   <li>Veterinaria:</li>
+                   <p className="texto">{publication.veterinary.name}</p>
+                   <li> Telefono:</li>
+                   <a className="lin" href={'https://wa.me/'+ publication.veterinary.phone} target="_blank"  >*{publication.veterinary.phone}</a>  
+               </ul>
+           </div>
+       </div>
+     </div>
+       );
+    };
+    return (
+       <div>{publication!==null && <Publication/>}</div> 
+    );
 
-
-const verpubli = (props) => {
-    
-  return (
-       <div class="seccion-perfil-usuario">
-        <img className="img-detras" src={img} alt=""/>  
-  <div class="perfil-usuario-header">
-      <div class="perfil-usuario-portada">   
-              <img src={img} alt="img-avatar"></img>        
-      </div>
-  </div>
-  <div class="perfil-usuario-body">
-      <div class="perfil-usuario-bio">
-          <h3 class="titulo">ghjg</h3>
-          <p class="texto">efgrhj</p>
-      </div>
-      <div class="perfil-usuario-footer">
-          <ul class="lista-datos">
-              <li> Direccion:</li>
-              <p class="texto">cochabamba</p>
-              <li>Veterinaria:</li>
-              <p class="texto">juanita</p>
-              <li> Telefono:</li>
-              <p class="texto">70765163</p>
-
-          </ul>
-      </div>
-  </div>
-</div>
-  );
 };
-export default verpubli;
+export default Verpubli;
