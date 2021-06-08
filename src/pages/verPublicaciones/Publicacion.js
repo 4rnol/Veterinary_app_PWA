@@ -1,9 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import './Publicacion.css'
 
 const Publicacion = (props) => {
+    console.log(props)
+    const publication = (id)=>{
+        props.history.push('/publications/'+id+'/publication');
+    }
     return (
-        <div className="card">
+        <div className="card" onClick={()=>publication (props.publication._id)}>
             <div className="card-head">
                 <div className="perfil">
                     <img className="card-img-perfil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_iIE5FiVia84_7Ewg0-P8Um_9IVDcY3hgMQ&usqp=CAU" alt=""/>
@@ -25,4 +30,4 @@ const Publicacion = (props) => {
     )
 }
 
-export default Publicacion;
+export default withRouter(Publicacion);
