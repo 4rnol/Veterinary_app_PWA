@@ -20,6 +20,7 @@ const Publicaciones = () => {
         };
         fetchData();
     }, [actualiza]);
+    
     return (
        <div className="containerPublications">
             <div id="btns-grupo" className="relleno"></div>
