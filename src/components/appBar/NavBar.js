@@ -6,11 +6,26 @@ import './NavBar.css';
 import { connect } from 'react-redux';
 import { changeUser,cleanAllReducers } from '../../redux/actions/index.actions';
 
-const {useState,useEffect}=React;
+const {useState,useEffect,useRef}=React;
 
 const NavBar =(props)=>{
   const[navOpen,setNavOpen]=useState(false);
   const isAuth=props.isAuth;
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+          setNavOpen(false);
+        }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
 
   const redirect=(route)=>{
     props.history.push(route);
@@ -26,7 +41,7 @@ const NavBar =(props)=>{
 
   return (
     <div role="navigation" className='navbar container-fluid'>
-      <div id="menuToggle">          
+      <div id="menuToggle" ref={wrapperRef}>          
         <input className="check" onChange={()=>setNavOpen(!navOpen)} type="checkbox" checked={navOpen}/>   
         <span></span>
         <span></span>     
