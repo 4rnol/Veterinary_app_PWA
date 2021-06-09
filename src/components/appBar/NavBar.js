@@ -12,10 +12,11 @@ const NavBar =(props)=>{
   const[navOpen,setNavOpen]=useState(false);
   const isAuth=props.isAuth;
   const wrapperRef = useRef(null);
+  const {user} = props.userReducer;
 
   useEffect(() => {
     function handleClickOutside(event) {
-        if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
           setNavOpen(false);
         }
     }
@@ -29,7 +30,7 @@ const NavBar =(props)=>{
 
   const redirect=(route)=>{
     props.history.push(route);
-    setNavOpen(!navOpen);
+    setNavOpen(false);
   };
 
   const Logout=()=>{
@@ -42,7 +43,7 @@ const NavBar =(props)=>{
   return (
     <div role="navigation" className='navbar container-fluid'>
       <div id="menuToggle" ref={wrapperRef}>          
-        <input className="check" onChange={()=>setNavOpen(!navOpen)} type="checkbox" checked={navOpen}/>   
+        <input className="check" onChange={()=>setNavOpen(prev=>!prev)} type="checkbox" checked={navOpen}/>   
         <span></span>
         <span></span>     
         <span></span>
@@ -67,6 +68,11 @@ const NavBar =(props)=>{
               <Nav.Link onClick={()=>redirect(routes.registerVeterinary)}><li>Registrar veterinaria</li></Nav.Link>
                 <hr />
             </div>}            
+          {user!==null&&((isAuth && user.email==='admin@admin.com') &&
+            <div>
+              <Nav.Link onClick={()=>redirect(routes.checkPub)}><li>Revisar publicaciones pendientes</li></Nav.Link>
+                <hr />
+            </div>)}            
           
           { 
             isAuth ? <Nav.Link onClick={()=>Logout()}><li>Logout</li></Nav.Link>:
