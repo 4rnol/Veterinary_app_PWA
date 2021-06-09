@@ -1,7 +1,7 @@
 import React from "react";
 import { routes } from "./RoutesConstants";
 import { BrowserRouter, Route } from "react-router-dom";
-import Login from '../pages/login';
+import Login from '../pages/Login';
 import Navbar from '../components/appBar/NavBar';
 import { changeUser } from '../redux/actions/index.actions';
 import registerPublication from '../pages/publicaciones/RegistrarPublicacion';
@@ -9,6 +9,7 @@ import registerVeterinary from '../pages/registro/RegistrarVeterinario';
 import infoVeterinary from '../pages/InformacionVeterinario/infoVeterinario';
 import {PrivateRoute} from '../constants/PrivateRoute';
 import Publicaciones from '../pages/verPublicaciones/Publicaciones';
+import publication from '../pages/verPubli/Verpubli';
 import { connect } from "react-redux";
 import login from '../api/BackendConnection/Login';
 import checkPub from '../pages/adminTable/CheckPendingPublications';
@@ -29,10 +30,11 @@ const RouterMain = (props) => {
   return (
     <BrowserRouter>
       <Navbar isAuth={isAuth} />
-      <Route exact={true} isAuth={isAuth} path={'/'} component={Login} />
-      <Route exact={true} isAuth={isAuth} path={routes.login} component={Login} />
-      <Route exact={true} isAuth={isAuth} path={routes.registerVeterinary} component={registerVeterinary} />
-      <Route exact={true} isAuth={isAuth} path={routes.publications} component={Publicaciones} />
+      <Route exact={true} path={'/'} component={Login} />
+      <Route exact={true} path={routes.login} component={Login} />
+      <Route exact={true} path={routes.registerVeterinary} component={registerVeterinary} />
+      <Route exact={true} path={routes.publications} component={Publicaciones} />
+      <Route exact={true} path={routes.publication} component={publication} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.registerPublication} component={registerPublication} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.infoVeterinary} component={infoVeterinary} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.checkPub} component={checkPub} />

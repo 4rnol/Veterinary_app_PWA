@@ -9,5 +9,6 @@ export const routes ={
     vacunas:'/vacunas',
     infoVeterinary:'/infoVeterinary',
     route404: '/404',
-    checkPub: '/checkPublications'
+    checkPub: '/checkPublications',
+    publication:'/publications/:id/publication'
 };
