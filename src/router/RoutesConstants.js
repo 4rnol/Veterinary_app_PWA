@@ -9,4 +9,5 @@ export const routes ={
     vacunas:'/vacunas',
     infoVeterinary:'/infoVeterinary',
     route404: '/404',
+    publication:'/publications/:id/publication'
 };

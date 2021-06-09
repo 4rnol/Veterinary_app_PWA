@@ -8,3 +8,11 @@ export async function getPublications(urltype) {
         console.log(error)
     }
 }
+export async function getPublication(id) {
+    try {
+        const response = await API.get('/informations/'+id);
+        return response.data;
+    } catch (error) {
+        console.log(error)
+    }
+}
