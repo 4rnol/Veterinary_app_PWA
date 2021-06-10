@@ -1,7 +1,7 @@
 import React from "react";
 import { routes } from "./RoutesConstants";
 import { BrowserRouter, Route } from "react-router-dom";
-import Login from '../pages/Login';
+import Login from '../pages/login';
 import Navbar from '../components/appBar/NavBar';
 import { changeUser } from '../redux/actions/index.actions';
 import registerPublication from '../pages/publicaciones/RegistrarPublicacion';
@@ -9,10 +9,10 @@ import registerVeterinary from '../pages/registro/RegistrarVeterinario';
 import infoVeterinary from '../pages/InformacionVeterinario/infoVeterinario';
 import {PrivateRoute} from '../constants/PrivateRoute';
 import Publicaciones from '../pages/verPublicaciones/Publicaciones';
-import publication from '../pages/verPubli/Verpubli';
+import publication from '../pages/verPubli/verpubli';
 import { connect } from "react-redux";
-import login from '../api/BackendConnection/Login';
 import checkPub from '../pages/adminTable/CheckPendingPublications';
+import login from '../api/BackendConnection/Login';
 
 const RouterMain = (props) => {
   const { user } = props.userReducer;

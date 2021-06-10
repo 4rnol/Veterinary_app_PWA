@@ -20,7 +20,6 @@ const Login = (props) => {
 
   const e = sessionStorage.getItem('email');
   const p = sessionStorage.getItem('password');
-  console.log('login')
   if (e !== null && p !== null) {
     login.login(e,p).then((data) => {
       props.changeUser(data);
