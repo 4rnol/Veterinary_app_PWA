@@ -5,13 +5,11 @@ import {getPublication} from "../../api/BackendConnection/servicePublications"
 import { useParams } from "react-router";
 const Verpubli = (props) => {
     let { id } = useParams();
-    console.log(id); 
     const [publication, setPublication] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await getPublication(id);
-                console.log(response);
                 setPublication(response);
             } catch (error) {
                 console.log(error);

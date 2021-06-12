@@ -26,7 +26,7 @@
   position: absolute;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
-  padding: 70px 30px;
+  padding: 100px 30px;
   border-radius: 15px;
 }
 #scroll{ 

@@ -12,7 +12,10 @@ import { usePhone } from '../../utils/validations/formValidations/usePhoneNumber
 import CrudVeterinary from '../../api/BackendConnection/CrudVeterinary';
 import {useEmail} from '../../utils/validations/formValidations/useEmailForm';
 import img from '../../assets/Dopi.jpg';
+import { routes } from '../../router/RoutesConstants';
+import { Modal } from 'react-bootstrap';
 
+const {useState,useEffect} = React;
 const RegistrarVeterinario = (props) => {
   const [file, handleFileChange, fileError, setFileError, fileMessage, setFileMessage, previewSource] = useFiles();
   const [usrName, handleUserNameChange, userNameError, setUserNameError, userNameMesasge, setUserNameMessage] = useName(3,25);
@@ -23,6 +26,7 @@ const RegistrarVeterinario = (props) => {
   const [passwordConfirm, handlePasswordConfirmChange, passwordConfirmError, setPasswordConfirmError, passwordConfirmMesasge, setPasswordConfirmMessage] = usePassConfirm();
   const [phone, handlePhoneChange, phoneError, setPhoneError, phoneErrorMessage, setPhoneErrorMessage] = usePhone();
   const [email, handleEmailChange, emailError, setEmailError, emailMessage, setEmailMessage] = useEmail();
+  const [modalOpen,setModalOpen] = useState(true);
 
   const registrar = (e) => {
     e.preventDefault();
@@ -36,13 +40,12 @@ const RegistrarVeterinario = (props) => {
       },
       async () => {
         await storageRef.getDownloadURL().then((url) => {
-          console.log(usrName,lastName,veterinary,email,phone,direccion,url,password);
           CrudVeterinary.createVeterinary(usrName,lastName,veterinary,email,phone,direccion,url,password)
           .then(resp=>{
-            console.log(resp)
+              props.history.push(routes.login);
           })
           .catch(err=>{
-            console.log(err);
+            console.warn(err);
           })
         });
       },
@@ -54,7 +57,7 @@ const RegistrarVeterinario = (props) => {
   };
   return (
     <div className="register-section">
-      <img className="img-detras" src={img}></img>
+      <img className="img-detras" src={img} alt="" />
       <div className="register-box">
         <div id="scroll">
           <h1>Registrar Veterinaria</h1>

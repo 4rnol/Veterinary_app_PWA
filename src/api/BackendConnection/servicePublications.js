@@ -5,7 +5,7 @@ export async function getPublications(urltype) {
         const response = await API.get('/informations'+urltype);
         return response.data;
     } catch (error) {
-        console.log(error)
+        console.warn(error)
     }
 }
 export async function getPublication(id) {
@@ -13,6 +13,43 @@ export async function getPublication(id) {
         const response = await API.get('/informations/'+id);
         return response.data;
     } catch (error) {
-        console.log(error)
+        console.warn(error)
+    }
+}
+
+export async function postPublication(title,category,description,urlFoto,veterinary) {
+    try {
+        const response = await API.post('/informations/',
+            {
+                title,
+                category,
+                description,
+                urlFoto,
+                veterinary
+            }
+        );
+        return response;
+    } catch (error) {
+        console.warn(error)
+    }
+}
+export async function getPendingPublications(){
+    try {
+        const response = await API.get('/informations/pending');
+        return response.data;
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+export async function updatePublicationState(state,id){
+    try {
+        const response = await API.put('informations/answer/'+id,
+        {
+            state
+        });
+        return response.data;
+    } catch (error) {
+        console.warn(error)
     }
 }

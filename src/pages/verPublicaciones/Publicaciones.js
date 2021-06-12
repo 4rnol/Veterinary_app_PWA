@@ -31,7 +31,7 @@ const Publicaciones = () => {
                 <button className= "btn-personalizado" onClick={()=>{setUrl("/category/vaccines"); setActualiza(!actualiza);}}>Vacunas</button>
             </div>
             {
-                publications.length >0 &&  publications.map((publication, index)=>{
+                publications.length > 0 &&  publications.map((publication, index)=>{
                     return(
                         <Publicacion key={index} publication={publication}/>
                     )
