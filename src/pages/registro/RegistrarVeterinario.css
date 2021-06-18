@@ -97,9 +97,7 @@ textarea {
   border: 2px dashed #000;
 }
 
-.input-registrarVeterinario:invalid:required {
-  background-image: linear-gradient(to right, #000, #000);
-}
+
 
 .input-registrarVeterinario:valid {
   border: 2px solid black;
