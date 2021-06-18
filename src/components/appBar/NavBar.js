@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Navbar,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap';
-import { Router, withRouter } from 'react-router-dom';
+import { Router, withRouter,useLocation, matchPath  } from 'react-router-dom';
 import {routes} from '../../router/RoutesConstants';
 import './NavBar.css';
 import { connect } from 'react-redux';
@@ -13,6 +13,9 @@ const NavBar =(props)=>{
   const isAuth=props.isAuth;
   const wrapperRef = useRef(null);
   const {user} = props.userReducer;
+  const [title,setTitle] = useState("");
+  const Location=useLocation();
+  console.log(window.location.pathname)
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -28,8 +31,27 @@ const NavBar =(props)=>{
     };
   }, [wrapperRef]);
 
-  const redirect=(route)=>{
-    props.history.push(route);
+  useEffect(() => {
+    setTitle(()=>{
+      switch (Location.pathname) {
+        case "/publications":
+          return "Publicaciones";
+        case "/registerPublication":
+          return "Registrar Publicación";
+        case "/checkPublications":
+          return "Revisar Publicación";
+        case 'publication':
+          return "Publicación";
+        default:
+          return "Inicio"
+      }
+    });
+    return () => {
+    }
+  }, [Location])
+
+  const redirect=(path)=>{
+    props.history.push(path);
     setNavOpen(false);
   };
 
@@ -39,6 +61,8 @@ const NavBar =(props)=>{
     props.cleanAllReducers();
     props.history.push(routes.login);
   };
+
+  
 
   return (
     <div role="navigation" className='navbar container-fluid'>
@@ -82,7 +106,7 @@ const NavBar =(props)=>{
         </ul>
       </div>
       <div className="title">
-          <h3 className="title-nav">Mi Veterinaria</h3>
+          <h3 className="title-nav">{title}</h3>
       </div>
     </div>
   );
