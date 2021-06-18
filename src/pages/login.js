@@ -72,7 +72,7 @@ const Login = (props) => {
           <input type="password" required minLength="5" maxLength="25" id="password" placeholder="Ingrese Contraseña" onChange={({target})=>handlePassword(target.value)}/>
           <button type="submit">Ingresar</button> 
         </form>
-        <Nav.Link onClick={()=>props.history.push(routes.registerVeterinary)}><li>No tienes cuenta Registrate</li></Nav.Link>
+        <Nav.Link onClick={()=>props.history.push(routes.registerVeterinary)} className="login-list"><li>No tienes cuenta Registrate</li></Nav.Link>
       </div>
     </div>
    );

@@ -39,31 +39,36 @@ const CheckPendingPublications = () => {
     });
   };
 
-  const acceptPublication = async (idPublication, index) => {
+  const acceptPublication = async () => {
     try {
-      await updatePublicationState('Aceptado', idPublication);
+      await updatePublicationState('Aceptado', publicationSelected);
       setPendingPublications((prev) => {
-        prev.splice(index, 1);
+        prev.splice(indexPubSelected, 1);
         return [...prev];
       });
+      setShowModal(false);
     } catch (err) {
       console.warn(err);
     }
   };
 
-  const rejectPublication = async (idPublication, index) => {
+  const handleClose=()=>{
+    setShowModal(false);
+  };
+
+  const rejectPublication = async () => {
     try {
-      await updatePublicationState('Rechazado', idPublication);
+      await updatePublicationState('Rechazado', publicationSelected);
       setPendingPublications((prev) => {
-        prev.splice(index, 1);
+        prev.splice(indexPubSelected, 1);
         return [...prev];
       });
+      setShowModal(false);
     } catch (err) {
       console.warn(err);
     }
   };
 
-  const handleClose = () => setShowModal(false);
 
   const handleShow = (idPublication, index, action) => {
     setPublicationSelected(idPublication);
@@ -81,7 +86,9 @@ const CheckPendingPublications = () => {
   return (
     <div className="checkPub-section">
       <img className="img-detras" src={img} alt="" />
-      <h2 className="btn-personalizado title">Publicaciones Pendientes</h2>
+      <div className="title-PendingPubBox">
+        <h2 className="title-pendingPub">Publicaciones Pendientes</h2>
+      </div>
       <div className="table-responsive">
         <table className="table table-dark table-striped">
           <thead>
@@ -138,15 +145,23 @@ const CheckPendingPublications = () => {
           </tbody>
         </table>
 
-        <Modal show={showModal} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+        <Modal show={showModal} centered onHide={handleClose}>
+          <Modal.Header>
+            <Modal.Title>Esta seguro que desea {actionType} la publicacion</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleClose}>
-              Aceptar
+            <Button variant="primary" style={{width:"7rem"}} onClick={handleClose}>
+              Cerrar
             </Button>
+            { actionType==="Aceptar" ? 
+              <Button variant="primary" style={{width:"7rem"}} className="bg-success" onClick={acceptPublication}>
+                Aceptar
+              </Button>
+              :
+              <Button variant="primary" style={{width:"7rem"}} className="bg-danger" onClick={rejectPublication}>
+                Rechazar
+              </Button>
+            }
           </Modal.Footer>
         </Modal>
 
