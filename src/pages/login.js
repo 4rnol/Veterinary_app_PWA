@@ -65,11 +65,11 @@ const Login = (props) => {
         <form onSubmit={(event)=>signIn(event)}>
           <br />
           <label htmlFor="email">Ingrese su correo:</label>
-          <input type="email" id="email" required minLength="15" maxLength="50" placeholder="Ingrese Usuario" onChange={({target})=>handleEmail(target.value)}/>
+          <input type="email" id="email" required minLength="15" maxLength="50" placeholder="Correo Electrónico" onChange={({target})=>handleEmail(target.value)}/>
          <br />
          {show && <Hover />}
           <label htmlFor="password">Ingrese su Contraseña</label>
-          <input type="password" required minLength="5" maxLength="25" id="password" placeholder="Ingrese Contraseña" onChange={({target})=>handlePassword(target.value)}/>
+          <input type="password" required minLength="5" maxLength="25" id="password" placeholder="Contraseña" onChange={({target})=>handlePassword(target.value)}/>
           <button type="submit">Iniciar Sesion</button> 
         </form>
         <Nav.Link onClick={()=>props.history.push(routes.registerVeterinary)}><li>No tienes cuenta Registrate</li></Nav.Link>

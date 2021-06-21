@@ -13,10 +13,16 @@ import CrudVeterinary from '../../api/BackendConnection/CrudVeterinary';
 import {useEmail} from '../../utils/validations/formValidations/useEmailForm';
 import img from '../../assets/Dopi.jpg';
 import { routes } from '../../router/RoutesConstants';
-import { Modal } from 'react-bootstrap';
+import { Button ,Modal, ModalHeader, ModalFooter, ModalTitle } from 'react-bootstrap';
 
-const {useState,useEffect} = React;
+
+const {useState, useEffect} = React;
 const RegistrarVeterinario = (props) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [file, handleFileChange, fileError, setFileError, fileMessage, setFileMessage, previewSource] = useFiles();
   const [usrName, handleUserNameChange, userNameError, setUserNameError, userNameMesasge, setUserNameMessage] = useName(3,25);
   const [lastName, handleLastNameChange, lastNameError, setLastNameError, lastNameMesasge, setLastNameMessage] = useLastName(3,25);
@@ -60,10 +66,10 @@ const RegistrarVeterinario = (props) => {
       <img className="img-detras" src={img} alt="" />
       <div className="register-box">
         <div id="scroll">
-          <h1>Registrar Veterinaria</h1>
+          <h1>Registro Veterinario</h1>
           <br />
           <form onSubmit={(event)=>registrar(event)}>
-            <label htmlFor="username">Nombre:</label>
+            <label htmlFor="username">Nombres:</label>
             <input
               type="text"
               className="input-registrarVeterinario"
@@ -86,7 +92,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handleLastNameChange(target.value)}
             />
             <br />
-            <label htmlFor="email">Correo Electronico:</label>
+            <label htmlFor="email">Correo Electrónico:</label>
             <input
               type="email"
               className="input-registrarVeterinario"
@@ -97,15 +103,16 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handleEmailChange(target.value)}
             />
             <br />
-            <label htmlFor="phone">Telefono:</label>
+            <label htmlFor="phone">Teléfono:</label>
             <input
               type="number"
               className="input-registrarVeterinario"
               placeholder="Ingrese Numero"
               required
               pattern="[1-9]+"
-              minLength="7"
               maxLength="7"
+              min = "60000000"
+              max = "80000000"
               onChange={({target})=>handlePhoneChange(target.value)}
             />
             <br />
@@ -138,18 +145,16 @@ const RegistrarVeterinario = (props) => {
               type="text"
               className="input-registrarVeterinario"
               placeholder="Ingrese nombre"
-              required
               minLength="3"
               maxLength="25"
               onChange={({target})=>handleVeterinaryChange(target.value)}
             />
             <br />
-            <label htmlFor="direction">Direccion:</label>
+            <label htmlFor="direction">Dirección:</label>
             <input
               type="text"
               className="input-registrarVeterinario"
               placeholder="Ingrese Direccion"
-              required
               minLength="3"
               maxLength="25"
               onChange={({target})=>handleDireccionChange(target.value)}
@@ -166,7 +171,16 @@ const RegistrarVeterinario = (props) => {
             {
               previewSource !=="" && <img href="img" alt="" src={previewSource} width='100%' height="220px"/>
             }
-            <button type="submit">Registrar</button>
+            <button type="submit"  onClick={handleShow}>Registrar</button>
+            <Modal  centered  size='lg' className="modalPublicacion" show={show} onHide={handleClose}>
+          <Modal.Title >Aviso</Modal.Title>
+        <Modal.Body>Registro Exitoso.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary"  onClick={handleClose} >
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
           </form>
         </div>
       </div>
