@@ -12,10 +12,15 @@ import {projectStorage} from '../../api/Firebase/config';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { routes } from '../../router/RoutesConstants';
-
+import {Button ,Modal, ModalHeader, ModalFooter, ModalTitle} from 'react-bootstrap';
 const {useState, useEffect} =React;
 
 const RegistrarPublicacion = (props) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const{user}=props.userReducer;
 
   const[file,
@@ -62,7 +67,7 @@ const RegistrarPublicacion = (props) => {
         });
     });
     }
-    
+   
   };
   const savePub=async(imgLink)=>{
     try{
@@ -81,7 +86,7 @@ const RegistrarPublicacion = (props) => {
         <h1>Registrar Publicacion</h1>        
           <br />
           <label htmlFor="username">Titulo</label>
-          <input type="text" placeholder="Ingrese Titulo" required onChange={({target})=>handleTitleChange(target.value)}/>
+          <input type="text" placeholder="Ingrese Titulo" minLength="3" maxLength="25" required onChange={({target})=>handleTitleChange(target.value)}/>
          <br />
           <label htmlFor="Categoria">Categoria</label>
           <br />
@@ -91,20 +96,23 @@ const RegistrarPublicacion = (props) => {
             <option value="Vacunas">Vacunas</option>
           </select>
           <br />
-          <label className="label-registrar-textarea" required>Ingrese descripción de la publicación</label>
+          <label className="label-registrar-textarea" required>Descripcion</label>
         <textarea  
           rows="20" 
           name="comment[text]" 
           id="comment_text" 
           cols="40" 
-          className="ui-autocomplete-input"           
+          className="ui-autocomplete-input"  
+          minLength="25"
+          maxLength="300"         
           aria-autocomplete="list" 
           aria-haspopup="true" 
+          required
           onChange={({target})=>handleDescriptionChange(target.value)}
         />
          <br />
          <label htmlFor="username">Agregar Imagen</label>
-          <input type="file" placeholder="Ingrese imagen" onChange={({target})=>handleFileChange(target.files[0])}/>
+          <input type="file" accept="image/jpeg" placeholder="Ingrese imagen" onChange={({target})=>handleFileChange(target.files[0])}/>
 
           { 
             previewSource!=="" && <img
@@ -114,10 +122,19 @@ const RegistrarPublicacion = (props) => {
               src={previewSource}
             />
           }
+          <button type="submit" onClick={handleShow}>Solicitar Publicacion</button>
 
-          <button type="submit">
-            Registrar
-            </button>
+          <Modal  centered  size='lg' className="modalPublicacion" show={show} onHide={handleClose}>
+          <Modal.Title >Aviso</Modal.Title>
+        <Modal.Body>La solicitud fue enviada exitosamente a los administradores para la publicación</Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        
+
         </form>    
       </div>
       </div>
