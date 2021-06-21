@@ -3,9 +3,12 @@ import "./verpubli.css";
 import img from "../../assets/Dopi.jpg";
 import {getPublication} from "../../api/BackendConnection/servicePublications"
 import { useParams } from "react-router";
+import { withRouter,NavLink } from "react-router-dom";
+
 const Verpubli = (props) => {
     let { id } = useParams();
     const [publication, setPublication] = useState(null);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -17,6 +20,7 @@ const Verpubli = (props) => {
         };
         fetchData();
     },[])
+
     const Publication =()=>{
         return (
             <div className="seccion-perfil-usuario">
@@ -36,7 +40,11 @@ const Verpubli = (props) => {
                    <li> Direccion:</li>
                    <p className="texto">{publication.veterinary.direction}</p>
                    <li>Veterinaria:</li>
-                   <p className="texto">{publication.veterinary.name}</p>
+                   <div>
+                   <p className="texto">{publication.veterinary.vet}</p>
+                   <NavLink className="veterinary_link" to={'/veterinary/'+publication.veterinary._id+'/info'}>Ver veterinario</NavLink>
+                   </div>
+                   
                    <li> Telefono:</li>
                    <a className="lin" href={'https://wa.me/'+ publication.veterinary.phone} target="_blank"  >*{publication.veterinary.phone}</a>  
                </ul>
@@ -50,4 +58,4 @@ const Verpubli = (props) => {
     );
 
 };
-export default Verpubli;
+export default withRouter(Verpubli);

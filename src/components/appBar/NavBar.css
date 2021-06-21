@@ -14,6 +14,7 @@
  */
 
 .navbar{
+  
   background-color: #278699;
   position: fixed;
   z-index: 100;
@@ -128,9 +129,8 @@
  {
    position: absolute;
    width: auto;
-   margin: -100px 0 0 -50px;
-   padding: 50px;
-   padding-top: 105px;
+   margin: auto 0 0 -20px;
+   padding: 10px;
    background: #278699;
    list-style-type: none;
    -webkit-font-smoothing: antialiased;
@@ -157,9 +157,10 @@
  {
    transform: none;
  }
- .title{
+ .title-navbar{
    width: 100%;
    display: flex;
+   align-items: center;
    height: 3.4rem;
  }
  .title-nav{
@@ -168,3 +169,25 @@
     font-size: 25px;
     color: #ffff;
  }
+
+ /*Search*/
+ input[type=text] {
+   
+  width: 130px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('../../assets/searchicon.png');
+  background-position: 5px 2px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}

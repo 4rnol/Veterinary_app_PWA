@@ -7,8 +7,9 @@ export const routes ={
     alimentacion:'/alimentacion',
     enfermedades:'/enfermedades',
     vacunas:'/vacunas',
-    infoVeterinary:'/infoVeterinary',
     route404: '/404',
     checkPub: '/checkPublications',
-    publication:'/publications/:id/publication'
+    publication:'/publications/:id/publication',
+    veterinaryInfo:'/veterinary/:id/info',
+    accountVeterinary:'/accountVeterinary/:id',
 };

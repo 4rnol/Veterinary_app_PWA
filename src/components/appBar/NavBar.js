@@ -4,18 +4,24 @@ import { Router, withRouter,useLocation, matchPath  } from 'react-router-dom';
 import {routes} from '../../router/RoutesConstants';
 import './NavBar.css';
 import { connect } from 'react-redux';
-import { changeUser,cleanAllReducers } from '../../redux/actions/index.actions';
+import { changeUser,cleanAllReducers,filterPublications } from '../../redux/actions/index.actions';
 
 const {useState,useEffect,useRef}=React;
 
 const NavBar =(props)=>{
-  const[navOpen,setNavOpen]=useState(false);
   const isAuth=props.isAuth;
+  const Location=useLocation();
   const wrapperRef = useRef(null);
   const {user} = props.userReducer;
   const [title,setTitle] = useState("");
-  const Location=useLocation();
-  console.log(window.location.pathname)
+  const[navOpen,setNavOpen]=useState(false);
+  const [showSearch,setShowSearch]=useState(false);
+  const textFilter = props.filterPubReducer;
+
+  useEffect(() => {
+    if(Location.pathname==="/publications") setShowSearch(true);
+    else{setShowSearch(false)}
+  }, [Location])
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -35,7 +41,7 @@ const NavBar =(props)=>{
     setTitle(()=>{
       switch (Location.pathname) {
         case "/publications":
-          return "Publicaciones";
+          return "";
         case "/registerPublication":
           return "Registrar Publicación";
         case "/checkPublications":
@@ -62,7 +68,9 @@ const NavBar =(props)=>{
     props.history.push(routes.login);
   };
 
-  
+  const filterText=(inputValue)=>{
+    props.filterPublications(inputValue);
+  };
 
   return (
     <div role="navigation" className='navbar container-fluid'>
@@ -72,41 +80,71 @@ const NavBar =(props)=>{
         <span></span>     
         <span></span>
         <ul id="menu">
-          {/* {isAuth && 
-            <div>
-              <Nav.Link onClick={()=>redirect(routes.home)}><li>Inicio</li></Nav.Link>
-              <hr />
-            </div>} */}
+          {
+            isAuth && 
+              <div>
+                  <Nav.Link onClick={()=>redirect(routes.registerPublication)}>
+                    <li>Registrar publicacion</li>
+                  </Nav.Link>
+                  <hr />
+              </div>
+          }
 
-          {isAuth && 
-            <div>
-                <Nav.Link onClick={()=>redirect(routes.registerPublication)}><li>Registrar publicacion</li></Nav.Link>
-                <hr />
-            </div>}
-
-          <Nav.Link onClick={()=>redirect(routes.publications)}><li>Publicaciones</li></Nav.Link>
+          <Nav.Link onClick={()=>redirect(routes.publications)}>
+            <li>Publicaciones</li>
+          </Nav.Link>
           <hr />   
 
-          {!isAuth && 
-            <div>
-              <Nav.Link onClick={()=>redirect(routes.registerVeterinary)}><li>Registrar veterinaria</li></Nav.Link>
+          {
+            !isAuth && 
+              <div>
+                <Nav.Link onClick={()=>redirect(routes.registerVeterinary)}>
+                  <li>Registrar veterinaria</li>
+                </Nav.Link>
                 <hr />
-            </div>}            
-          {user!==null&&((isAuth && user.email==='admin@admin.com') &&
-            <div>
-              <Nav.Link onClick={()=>redirect(routes.checkPub)}><li>Revisar publicaciones pendientes</li></Nav.Link>
+              </div>
+          }            
+          {
+            user!==null&&((isAuth && user.email==='admin@admin.com') &&
+              <div>
+                <Nav.Link onClick={()=>redirect(routes.checkPub)}>
+                  <li>Revisar publicaciones pendientes</li>
+                </Nav.Link>
                 <hr />
-            </div>)}            
-          
+              </div>)
+          }            
+          {/* {
+            isAuth && 
+              <div>
+                  <Nav.Link onClick={()=>redirect(routes.veterinaryInfo)}>
+                    <li>Cuenta</li>
+                  </Nav.Link>
+                  <hr />
+              </div>
+          } */}
           { 
-            isAuth ? <Nav.Link onClick={()=>Logout()}><li>Logout</li></Nav.Link>:
-            <Nav.Link onClick={()=>redirect(routes.login)}><li>Login</li></Nav.Link>
+            isAuth ? <Nav.Link onClick={()=>Logout()}>
+              <li>Cerrar Sesión</li>
+            </Nav.Link>:
+            <Nav.Link onClick={()=>redirect(routes.login)}>
+              <li>Iniciar Sesión</li>
+            </Nav.Link>
           }
           
         </ul>
       </div>
-      <div className="title">
+      <div className="title-navbar">
           <h3 className="title-nav">{title}</h3>
+          {
+            showSearch &&
+              <input 
+                type="text" 
+                name="search" 
+                value={textFilter} 
+                placeholder="Buscar publicación" 
+                onChange={({target})=>filterText(target.value)}
+              />
+          }
       </div>
     </div>
   );
@@ -115,11 +153,13 @@ const NavBar =(props)=>{
 const mapStateToProps = (state) => {
   return {
     userReducer: state.userReducer,
+    filterPubReducer:state.filterPublicationsReducer,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeUser: (user) => dispatch(changeUser(user)),
   cleanAllReducers:()=>dispatch(cleanAllReducers()),
+  filterPublications:(text) => dispatch(filterPublications(text)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

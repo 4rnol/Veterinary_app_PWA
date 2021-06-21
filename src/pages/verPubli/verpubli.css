@@ -84,3 +84,8 @@
     }
     
 }
+.veterinary_link{
+    position: relative;
+    float: right;
+    top: -40px;
+}

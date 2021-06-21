@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseUrl } from '../keys';
-
+import API from '../API';
 class CrudVeterinary {
 //   getUsers() {
 //     return new Promise((resolve, reject) => {
@@ -32,6 +32,15 @@ class CrudVeterinary {
             .catch((e) => reject(e));
         });
       }
+}
+
+export async function getVeterinary(id) {
+  try {
+      const response = await API.get('/user/veterinary/'+id);
+      return response.data;
+  } catch (error) {
+      console.warn(error)
+  }
 }
 
 export default new CrudVeterinary();

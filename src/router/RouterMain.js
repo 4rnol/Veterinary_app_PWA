@@ -18,6 +18,7 @@ const RouterMain = (props) => {
   const { user } = props.userReducer;
   const e = sessionStorage.getItem('email');
   const p = sessionStorage.getItem('password');
+
   if (e !== null && p !== null && user === null) {
     login.login(e,p).then((data) => {
       props.changeUser(data);
@@ -30,13 +31,13 @@ const RouterMain = (props) => {
   return (
     <BrowserRouter>
       <Navbar isAuth={isAuth} />
-      <Route exact={true} path={'/'} component={Login} />
       <Route exact={true} path={routes.login} component={Login} />
+      <Route exact={true} path={'/'} component={Login} />
       <Route exact={true} path={routes.registerVeterinary} component={registerVeterinary} />
       <Route exact={true} path={routes.publications} component={Publicaciones} />
       <Route exact={true} path={routes.publication} component={publication} />
+      <Route exact={true} path={routes.veterinaryInfo} component={infoVeterinary} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.registerPublication} component={registerPublication} />
-      <PrivateRoute isAuth={isAuth} exact={true} path={routes.infoVeterinary} component={infoVeterinary} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.checkPub} component={checkPub} />
     </BrowserRouter>
   );
