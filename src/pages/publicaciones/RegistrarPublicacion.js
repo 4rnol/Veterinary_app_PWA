@@ -87,10 +87,10 @@ const RegistrarPublicacion = (props) => {
      <form onSubmit={(e)=>registrar(e)}>
         <h1>Registrar Publicacion</h1>        
           <br />
-          <label htmlFor="username">Titulo</label>
+          <label htmlFor="username">*Titulo</label>
           <input type="text" placeholder="Ingrese Titulo" minLength="3" maxLength="25" required onChange={({target})=>handleTitleChange(target.value)}/>
          <br />
-          <label htmlFor="Categoria">Categoria</label>
+          <label htmlFor="Categoria">*Categoria</label>
           <br />
           <select name="Categoria" onChange={({target})=>setCategory(target.value)}>
             <option value="Cuidado alimenticio">Cuidado Alimenticio</option> 
@@ -98,7 +98,7 @@ const RegistrarPublicacion = (props) => {
             <option value="Vacunas">Vacunas</option>
           </select>
           <br />
-          <label className="label-registrar-textarea" required>Descripcion</label>
+          <label className="label-registrar-textarea" required>*Descripcion</label>
         <textarea  
           rows="20" 
           name="comment[text]" 

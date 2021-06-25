@@ -82,6 +82,11 @@ textarea {
   height: 40px;
   color: #fff;
   font-size: 16px;
+    padding-left: 0px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 20px;
+
 }
 .registrar-box select{
   max-width: 250px;
