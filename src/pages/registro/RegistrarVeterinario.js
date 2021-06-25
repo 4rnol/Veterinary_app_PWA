@@ -69,7 +69,7 @@ const RegistrarVeterinario = (props) => {
           <h1>Registro Veterinario</h1>
           <br />
           <form onSubmit={(event)=>registrar(event)}>
-            <label htmlFor="username">Nombres:</label>
+            <label htmlFor="username">Nombres*:</label>
             <input
               type="text"
               className="input-registrarVeterinario"
@@ -81,7 +81,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handleUserNameChange(target.value)}
             />
             <br />
-            <label htmlFor="username">Apellido:</label>
+            <label htmlFor="username">Apellidos*:</label>
             <input
               type="text"
               className="input-registrarVeterinario"
@@ -92,7 +92,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handleLastNameChange(target.value)}
             />
             <br />
-            <label htmlFor="email">Correo Electrónico:</label>
+            <label htmlFor="email">Correo Electrónico*:</label>
             <input
               type="email"
               className="input-registrarVeterinario"
@@ -103,7 +103,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handleEmailChange(target.value)}
             />
             <br />
-            <label htmlFor="phone">Teléfono:</label>
+            <label htmlFor="phone">Teléfono*:</label>
             <input
               type="number"
               className="input-registrarVeterinario"
@@ -116,7 +116,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handlePhoneChange(target.value)}
             />
             <br />
-            <label htmlFor="password">Contraseña:</label>
+            <label htmlFor="password">Contraseña*:</label>
             <input
               type="password"
               className="input-registrarVeterinario"
@@ -128,7 +128,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({target})=>handlePassChange(target.value)}
             />
             <br />
-            <label htmlFor="password">Confirmar contraseña:</label>
+            <label htmlFor="password">Confirmar contraseña*:</label>
             <input
               type="password"
               className="input-registrarVeterinario"
@@ -164,7 +164,6 @@ const RegistrarVeterinario = (props) => {
               type="file"
               className="input-registrarVeterinario"
               placeholder="Ingrese imagen"
-              required
               onChange={({ target }) => handleFileChange(target.files[0])}
             />
 

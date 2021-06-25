@@ -139,7 +139,8 @@ const NavBar =(props)=>{
             showSearch &&
               <input 
                 type="text" 
-                name="search" 
+                name="search"
+                maxLength="25"
                 value={textFilter} 
                 placeholder="Buscar publicación" 
                 onChange={({target})=>filterText(target.value)}
