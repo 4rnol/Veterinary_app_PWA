@@ -187,7 +187,7 @@ const RegistrarVeterinario = (props) => {
               onChange={({ target }) => handleFileChange(target.files[0])}
             />
 
-            {previewSource !== '' && <img href="img" alt="" src={previewSource} width="100%" height="220px" />}
+            {previewSource && <img href="img" alt="" src={previewSource} width="100%" height="220px" />}
             <button type="submit" onClick={handleShow}>
               Registrar
             </button>

@@ -117,7 +117,7 @@ const RegistrarPublicacion = (props) => {
           <input type="file" accept="image/jpeg" placeholder="Ingrese imagen" onChange={({target})=>handleFileChange(target.files[0])}/>
 
           { 
-            previewSource!=="" && <img
+            previewSource && <img
               alt=""
               width="100%"
               height="220px"

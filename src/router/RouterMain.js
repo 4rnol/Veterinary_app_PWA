@@ -7,6 +7,7 @@ import { changeUser } from '../redux/actions/index.actions';
 import registerPublication from '../pages/publicaciones/RegistrarPublicacion';
 import registerVeterinary from '../pages/registro/RegistrarVeterinario';
 import infoVeterinary from '../pages/InformacionVeterinario/infoVeterinario';
+import account from '../pages/account/account';
 import vetPublications from '../pages/veterinaryPublications/veterinaryPublications';
 import {PrivateRoute} from '../constants/PrivateRoute';
 import Publicaciones from '../pages/verPublicaciones/Publicaciones';
@@ -28,7 +29,6 @@ const RouterMain = (props) => {
   }
   const isAuth = (e !== null && p !== null) || user != null;
 
-  
   return (
     <BrowserRouter>
       <Navbar isAuth={isAuth} />
@@ -39,6 +39,7 @@ const RouterMain = (props) => {
       <Route exact={true} path={routes.publication} component={publication} />
       <Route exact={true} path={routes.veterinaryInfo} component={infoVeterinary} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.registerPublication} component={registerPublication} />
+      <PrivateRoute isAuth={isAuth} exact={true} path={routes.account} component={account} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.checkPub} component={checkPub} />
       <PrivateRoute isAuth={isAuth} exact={true} path={routes.veterinaryPublications} component={vetPublications} />
     </BrowserRouter>

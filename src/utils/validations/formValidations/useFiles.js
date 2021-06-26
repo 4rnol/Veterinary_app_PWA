@@ -26,26 +26,29 @@ import {
 } from '../../../constants/strings';
 
 export const useFiles=()=>{
-    const [values, setValues] = useState(null);
-    const [fileError,setFileError] = useState(false);
-  
-    const [fileMessage,setFileMessage] = useState("");
-    const [previewSource,setPreviewSource]=useState("");
-  
-    const preViewFile=(file)=>{
-      const reader=new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend=()=>{
-        setPreviewSource(reader.result);
-      }
+  const [values, setValues] = useState(null);
+  const [fileError,setFileError] = useState(false);
+
+  const [fileMessage,setFileMessage] = useState("");
+  const [previewSource,setPreviewSource]=useState(null);
+
+  const preViewFile=(file)=>{
+    const reader=new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend=()=>{
+      setPreviewSource(reader.result);
     }
-    const handleFileChange = (value) =>{
-        setValues(value);
-        setFileError(false);
-        preViewFile(value);
+  }
+  const handleFileChange = (value,link) =>{
+    if(link===""){
+      setValues(value);
+      setFileError(false);
+      preViewFile(value);
+    }else{
+      setPreviewSource(link);
     }
-   
-    return [values,handleFileChange,fileError,
-      setFileError,fileMessage,setFileMessage,previewSource];
-  
-  };
+  }
+ 
+  return [values,handleFileChange,fileError,
+    setFileError,fileMessage,setFileMessage,previewSource];  
+};

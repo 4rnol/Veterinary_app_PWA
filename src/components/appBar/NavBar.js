@@ -5,6 +5,7 @@ import {routes} from '../../router/RoutesConstants';
 import './NavBar.css';
 import { connect } from 'react-redux';
 import { changeUser,cleanAllReducers,filterPublications } from '../../redux/actions/index.actions';
+import imgPrueba from '../../assets/Perrito.jpg'; 
 
 const {useState,useEffect,useRef}=React;
 
@@ -74,88 +75,91 @@ const NavBar =(props)=>{
 
   return (
     <div role="navigation" className='navbar container-fluid'>
-      <div id="menuToggle" ref={wrapperRef}>          
-        <input className="check" onChange={()=>setNavOpen(prev=>!prev)} type="checkbox" checked={navOpen}/>   
-        <span></span>
-        <span></span>     
-        <span></span>
-        <ul id="menu">
-          {
-            isAuth && 
-              <div>
-                  <Nav.Link onClick={()=>redirect(routes.registerPublication)}>
-                    <li>Registrar publicacion</li>
-                  </Nav.Link>
-                  <hr />
-              </div>
-          }
+      <div>
+        <div id="menuToggle" ref={wrapperRef}>          
+          <input className="check" onChange={()=>setNavOpen(prev=>!prev)} type="checkbox" checked={navOpen}/>   
+          <span></span>
+          <span></span>     
+          <span></span>
+          <ul id="menu">
+            {
+              isAuth && 
+                <div>
+                    <Nav.Link onClick={()=>redirect(routes.registerPublication)}>
+                      <li>Registrar publicacion</li>
+                    </Nav.Link>
+                    <hr />
+                </div>
+            }
 
-          <Nav.Link onClick={()=>redirect(routes.publications)}>
-            <li>Publicaciones</li>
-          </Nav.Link>
-          <hr />   
-
-          {
-            !isAuth && 
-              <div>
-                <Nav.Link onClick={()=>redirect(routes.registerVeterinary)}>
-                  <li>Registrar veterinaria</li>
-                </Nav.Link>
-                <hr />
-              </div>
-          }            
-          {
-            isAuth && 
-              <div>
-                <Nav.Link onClick={()=>redirect(routes.veterinaryPublications)}>
-                  <li>Mis publicaciones</li>
-                </Nav.Link>
-                <hr />
-              </div>
-          }            
-          {
-            user!==null&&((isAuth && user.email==='admin@admin.com') &&
-              <div>
-                <Nav.Link onClick={()=>redirect(routes.checkPub)}>
-                  <li>Revisar publicaciones pendientes</li>
-                </Nav.Link>
-                <hr />
-              </div>)
-          }            
-          {/* {
-            isAuth && 
-              <div>
-                  <Nav.Link onClick={()=>redirect(routes.veterinaryInfo)}>
-                    <li>Cuenta</li>
-                  </Nav.Link>
-                  <hr />
-              </div>
-          } */}
-          { 
-            isAuth ? <Nav.Link onClick={()=>Logout()}>
-              <li>Cerrar Sesión</li>
-            </Nav.Link>:
-            <Nav.Link onClick={()=>redirect(routes.login)}>
-              <li>Iniciar Sesión</li>
+            <Nav.Link onClick={()=>redirect(routes.publications)}>
+              <li>Publicaciones</li>
             </Nav.Link>
-          }
-          
-        </ul>
+            <hr />   
+
+            {
+              !isAuth && 
+                <div>
+                  <Nav.Link onClick={()=>redirect(routes.registerVeterinary)}>
+                    <li>Registrar veterinaria</li>
+                  </Nav.Link>
+                  <hr />
+                </div>
+            }            
+            {
+              isAuth && 
+                <div>
+                  <Nav.Link onClick={()=>redirect(routes.veterinaryPublications)}>
+                    <li>Mis publicaciones</li>
+                  </Nav.Link>
+                  <hr />
+                </div>
+            }            
+            {
+              user!==null&&((isAuth && user.email==='admin@admin.com') &&
+                <div>
+                  <Nav.Link onClick={()=>redirect(routes.checkPub)}>
+                    <li>Revisar publicaciones pendientes</li>
+                  </Nav.Link>
+                  <hr />
+                </div>)
+            }            
+            {/* {
+              isAuth && 
+                <div>
+                    <Nav.Link onClick={()=>redirect(routes.account)}>
+                      <li>Cuenta</li>
+                    </Nav.Link>
+                    <hr />
+                </div>
+            } */}
+            { 
+              isAuth ? <Nav.Link onClick={()=>Logout()}>
+                <li>Cerrar Sesión</li>
+              </Nav.Link>:
+              <Nav.Link onClick={()=>redirect(routes.login)}>
+                <li>Iniciar Sesión</li>
+              </Nav.Link>
+            }
+            
+          </ul>
+        </div>
+        <div className="title-navbar">
+            <h3 className="title-nav">{title}</h3>
+            {
+              showSearch &&
+                <input 
+                  type="text" 
+                  name="search"
+                  maxLength="25"
+                  value={textFilter} 
+                  placeholder="Buscar publicación" 
+                  onChange={({target})=>filterText(target.value)}
+                />
+            }
+        </div>
       </div>
-      <div className="title-navbar">
-          <h3 className="title-nav">{title}</h3>
-          {
-            showSearch &&
-              <input 
-                type="text" 
-                name="search"
-                maxLength="25"
-                value={textFilter} 
-                placeholder="Buscar publicación" 
-                onChange={({target})=>filterText(target.value)}
-              />
-          }
-      </div>
+      {user && <img className="imgAccount-navbar" alt="" src={user.urlImg} onClick={()=>props.history.push(routes.account)}/>}
     </div>
   );
 }

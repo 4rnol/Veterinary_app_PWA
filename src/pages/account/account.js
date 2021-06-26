@@ -12,39 +12,124 @@ import { usePassword } from '../../utils/validations/formValidations/usePassword
 import { usePassword as usePassConfirm } from '../../utils/validations/formValidations/usePasswordForm';
 import { usePhone } from '../../utils/validations/formValidations/usePhoneNumberForm';
 import { useEmail } from '../../utils/validations/formValidations/useEmailForm';
+import { connect } from 'react-redux';
+import { updateVeterinary } from '../../api/BackendConnection/CrudVeterinary';
+import { routes } from '../../router/RoutesConstants';
 
 const { useState, useEffect } = React;
 
-const Account = () => {
-    const [show, setShow] = useState(false);
-  const [file, handleFileChange, fileError, setFileError, fileMessage, setFileMessage, previewSource] = useFiles();
-  const [usrName, handleUserNameChange, userNameError, setUserNameError, userNameMesasge, setUserNameMessage] = useName(3,25,);
-  const [lastName, handleLastNameChange, lastNameError, setLastNameError, lastNameMesasge, setLastNameMessage] = useLastName(3, 25);
+const Account = (props) => {
+  const [show, setShow] = useState(false);
+  const [
+    file, 
+    handleFileChange, 
+    fileError, 
+    setFileError, 
+    fileMessage, 
+    setFileMessage, 
+    previewSource] = useFiles();
+  const [
+    usrName, 
+    handleUserNameChange, 
+    userNameError, 
+    setUserNameError, 
+    userNameMesasge, 
+    setUserNameMessage] = useName(3,25,);
+  const [
+    lastName, 
+    handleLastNameChange, 
+    lastNameError, 
+    setLastNameError, 
+    lastNameMesasge, 
+    setLastNameMessage] = useLastName(3, 25);
   const [
     veterinary,
     handleVeterinaryChange,
     veterinaryError,
     setVeterinaryError,
     veterinaryMesasge,
-    setVeterinaryMessage,
-  ] = useNameVeterinary(3, 25);
-  const [direccion, handleDireccionChange, direccionError, setDireccionError, direccionMesasge, setDireccionMessage] =
-    useDireccion(3, 25);
-  const [password, handlePassChange, passwordError, setPasswordError, passMessage, setPassMessage] = usePassword();
+    setVeterinaryMessage] = useNameVeterinary(3, 25);
+
+  const [
+    direccion, 
+    handleDireccionChange, 
+    direccionError, 
+    setDireccionError, 
+    direccionMesasge, 
+    setDireccionMessage] = useDireccion(3, 25);
+  const [
+    password, 
+    handlePassChange, 
+    passwordError, 
+    setPasswordError, 
+    passMessage, 
+    setPassMessage] = usePassword();
   const [
     passwordConfirm,
     handlePasswordConfirmChange,
     passwordConfirmError,
     setPasswordConfirmError,
     passwordConfirmMesasge,
-    setPasswordConfirmMessage,
-  ] = usePassConfirm();
-  const [phone, handlePhoneChange, phoneError, setPhoneError, phoneErrorMessage, setPhoneErrorMessage] = usePhone();
-  const [email, handleEmailChange, emailError, setEmailError, emailMessage, setEmailMessage] = useEmail();
+    setPasswordConfirmMessage] = usePassConfirm();
+  const [
+    phone, 
+    handlePhoneChange, 
+    phoneError, 
+    setPhoneError, 
+    phoneErrorMessage, 
+    setPhoneErrorMessage] = usePhone();
+  const [
+    email, 
+    handleEmailChange, 
+    emailError, 
+    setEmailError, 
+    emailMessage, 
+    setEmailMessage] = useEmail();
+
   const [modalOpen, setModalOpen] = useState(true);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
+  const {user} = props.userReducer;
+  
+  useEffect(() => {
+    if(user){
+      handleUserNameChange(user.name);
+      handleLastNameChange(user.last_name);
+      handlePhoneChange(user.phone);
+      handleEmailChange(user.email);
+      handleDireccionChange(user.direction);
+      handleFileChange(null, user.imgUrl);
+    }
+  }, [])
+
+  const registrar=(e)=>{
+    e.preventDefault();
+    if (password === passwordConfirm) {
+      const storageRef = projectStorage.ref(`Veterinary/${file.name}`);
+      storageRef.put(file).on(
+        'state_changed',
+        () => {},
+        (err) => {
+          console.log('error' + err);
+        },
+        async () => {
+          await storageRef.getDownloadURL().then(async(url) => {
+            try{
+              await updateVeterinary(user._id,usrName, lastName, email, phone, direccion, url, password);
+              props.history.push(routes.login);
+            }catch(err){
+              console.error(err);
+            }
+          });
+        },
+      );
+    } else {
+      const confirm_password = document.getElementById('confirm_password');
+      confirm_password.setCustomValidity('Contraseñas no coninciden');
+    }
+  };
 
   return (
     <div className="register-section">
@@ -54,7 +139,7 @@ const Account = () => {
           <h1>Registro Veterinario</h1>
           <br />
           <form onSubmit={(event) => registrar(event)}>
-            <label htmlFor="username">Nombres*:</label>
+            <label htmlFor="username">Nombres:</label>
             <input
               type="text"
               className="input-registrarVeterinario"
@@ -63,10 +148,11 @@ const Account = () => {
               pattern="[A-Z a-z]+"
               minLength="3"
               maxLength="25"
+              value={usrName}
               onChange={({ target }) => handleUserNameChange(target.value)}
             />
             <br />
-            <label htmlFor="username">Apellidos*:</label>
+            <label htmlFor="username">Apellidos:</label>
             <input
               type="text"
               className="input-registrarVeterinario"
@@ -74,10 +160,11 @@ const Account = () => {
               required
               minLength="3"
               maxLength="25"
+              value={lastName}
               onChange={({ target }) => handleLastNameChange(target.value)}
             />
             <br />
-            <label htmlFor="email">Correo Electrónico*:</label>
+            <label htmlFor="email">Correo Electrónico:</label>
             <input
               type="email"
               className="input-registrarVeterinario"
@@ -85,10 +172,11 @@ const Account = () => {
               required
               minLength="15"
               maxLength="50"
+              value={email}
               onChange={({ target }) => handleEmailChange(target.value)}
             />
             <br />
-            <label htmlFor="phone">Teléfono*:</label>
+            <label htmlFor="phone">Teléfono:</label>
             <input
               type="number"
               className="input-registrarVeterinario"
@@ -98,41 +186,32 @@ const Account = () => {
               maxLength="7"
               min="60000000"
               max="80000000"
+              value={phone}
               onChange={({ target }) => handlePhoneChange(target.value)}
             />
             <br />
-            <label htmlFor="password">Contraseña*:</label>
+            <label htmlFor="password">Contraseña:</label>
             <input
               type="password"
               className="input-registrarVeterinario"
               placeholder="Ingrese contraseña"
-              required
+              
               id="password"
               minLength="5"
               maxLength="25"
               onChange={({ target }) => handlePassChange(target.value)}
             />
             <br />
-            <label htmlFor="password">Confirmar contraseña*:</label>
+            <label htmlFor="password">Confirmar contraseña:</label>
             <input
               type="password"
               className="input-registrarVeterinario"
               placeholder="Confirmar Contraseña"
               id="confirm_password"
-              required
+              
               minLength="5"
               maxLength="25"
               onChange={({ target }) => handlePasswordConfirmChange(target.value)}
-            />
-            <br />
-            <label htmlFor="username">Nombre de Veterinaria:</label>
-            <input
-              type="text"
-              className="input-registrarVeterinario"
-              placeholder="Ingrese nombre"
-              minLength="3"
-              maxLength="25"
-              onChange={({ target }) => handleVeterinaryChange(target.value)}
             />
             <br />
             <label htmlFor="direction">Dirección:</label>
@@ -142,6 +221,7 @@ const Account = () => {
               placeholder="Ingrese Direccion"
               minLength="3"
               maxLength="25"
+              value={direccion}
               onChange={({ target }) => handleDireccionChange(target.value)}
             />
             <label htmlFor="username">Agregar Imagen:</label>
@@ -149,10 +229,10 @@ const Account = () => {
               type="file"
               className="input-registrarVeterinario"
               placeholder="Ingrese imagen"
-              onChange={({ target }) => handleFileChange(target.files[0])}
+              onChange={({ target }) => handleFileChange(target.files[0],'')}
             />
 
-            {previewSource !== '' && <img href="img" alt="" src={previewSource} width="100%" height="220px" />}
+            {previewSource && <img href="img" alt="" src={previewSource} width="100%" height="220px" />}
             <button type="submit" onClick={handleShow}>
               Registrar
             </button>
@@ -172,4 +252,10 @@ const Account = () => {
   );
 };
 
-export default withRouter(Account);
+const mapStateToProps=(state)=>{
+  return {
+    userReducer:state.userReducer,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(Account));

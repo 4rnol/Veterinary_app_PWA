@@ -42,5 +42,22 @@ export async function getVeterinary(id) {
       console.warn(error)
   }
 }
+export async function updateVeterinary(id,usrName, lastName, email, phone, direccion, url, password) {
+  console.log(id,usrName, lastName, email, phone, direccion, url, password);
+  try {
+      const response = await API.put('/user/veterinary/'+id,{
+        name:usrName, 
+        last_name:lastName, 
+        email, 
+        phone, 
+        direccion, 
+        urlImg:url, 
+        password,
+      });
+      return response.data;
+  } catch (error) {
+      console.warn(error)
+  }
+}
 
 export default new CrudVeterinary();

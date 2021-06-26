@@ -20,6 +20,7 @@ const VeterinaryPublications = (props) => {
   const [actionType, setActionType] = useState('');
   const ref = useRef(null);
   const {user} = props.userReducer;
+  
   useEffect(() => {
     (async function () {
       try {

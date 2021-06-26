@@ -14,7 +14,7 @@
  */
 
 .navbar{
-  
+  display: flex;
   background-color: #278699;
   position: fixed;
   z-index: 100;
@@ -173,7 +173,7 @@
  /*Search*/
  input[type=text] {
    
-  width: 130px;
+  width: 80px;
   height: 20px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -192,4 +192,11 @@
 
 input[type=text]:focus {
   width: 100%;
+}
+
+.imgAccount-navbar{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  float: right;
 }
