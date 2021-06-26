@@ -53,3 +53,12 @@ export async function updatePublicationState(state,id){
         console.warn(error)
     }
 }
+
+export async function getVeterinaryPublications(id){
+    try {
+        const response = await API.get('informations/vet/'+id);
+        return response.data;
+    } catch (error) {
+        console.warn(error)
+    }
+}

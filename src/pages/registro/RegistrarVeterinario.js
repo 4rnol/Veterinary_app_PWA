@@ -9,14 +9,16 @@ import { useFullName as useDireccion } from '../../utils/validations/formValidat
 import { usePassword } from '../../utils/validations/formValidations/usePasswordForm';
 import { usePassword as usePassConfirm } from '../../utils/validations/formValidations/usePasswordForm';
 import { usePhone } from '../../utils/validations/formValidations/usePhoneNumberForm';
-import CrudVeterinary from '../../api/BackendConnection/CrudVeterinary';
 import { useEmail } from '../../utils/validations/formValidations/useEmailForm';
+import CrudVeterinary from '../../api/BackendConnection/CrudVeterinary';
 import img from '../../assets/Dopi.jpg';
 import { routes } from '../../router/RoutesConstants';
 import { Button, Modal, ModalHeader, ModalFooter, ModalTitle } from 'react-bootstrap';
 
 const { useState, useEffect } = React;
+
 const RegistrarVeterinario = (props) => {
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

@@ -21,10 +21,8 @@ const CheckPendingPublications = () => {
   const [actionType, setActionType] = useState('');
   const ref = useRef(null);
 
-  console.log(pendingPublication);
   useEffect(() => {
     const fetchPublications=async()=> {
-      console.log("entra")
       try {
         const resp = await getPendingPublications();
         await setPendingPublications(resp);
@@ -33,7 +31,7 @@ const CheckPendingPublications = () => {
       }
     }
     pendingPublication.length===0 && fetchPublications()
-  }, [pendingPublication]);
+  }, []);
 
   const popUpImg = (srcImg = '') => {
     setOpenImg((prev) => {

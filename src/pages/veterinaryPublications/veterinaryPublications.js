@@ -2,11 +2,12 @@ import * as React from 'react';
 import { withRouter } from 'react-router';
 import { Button, Overlay, Popover, Modal } from 'react-bootstrap';
 import img from '../../assets/Dopi.jpg';
-import { getPendingPublications } from '../../api/BackendConnection/servicePublications';
+import { getVeterinaryPublications } from '../../api/BackendConnection/servicePublications';
+import { connect } from 'react-redux';
 
 const { useState, useEffect, useRef } = React;
 
-const VeterinaryPublications = () => {
+const VeterinaryPublications = (props) => {
   const [pendingPublication, setPendingPublications] = useState([]);
   const [openImg, setOpenImg] = useState(false);
   const [modalImgSrc, setModalImgSrc] = useState('');
@@ -18,11 +19,11 @@ const VeterinaryPublications = () => {
   const [indexPubSelected, setIndexPubSelected] = useState(0);
   const [actionType, setActionType] = useState('');
   const ref = useRef(null);
-
+  const {user} = props.userReducer;
   useEffect(() => {
     (async function () {
       try {
-        const resp = await getPendingPublications();
+        const resp = await getVeterinaryPublications(user._id);
         setPendingPublications(resp);
       } catch (err) {
         console.warn(err);
@@ -54,6 +55,11 @@ const VeterinaryPublications = () => {
     setTarget(event.target);
   };
 
+  const formatDate=(fecha)=>{
+    const date=new Date(fecha).toLocaleDateString(); 
+    return date;
+  };
+
   return (
     <div className="checkPub-section">
       <img className="img-detras" src={img} alt="" />
@@ -65,12 +71,12 @@ const VeterinaryPublications = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Veterinaria</th>
               <th scope="col">Titulo</th>
               <th scope="col">Descripcion</th>
               <th scope="col">Categoria</th>
               <th scope="col">Imagen</th>
-              <th scope="col">Acciones</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Revisión</th>
             </tr>
           </thead>
           <tbody>
@@ -79,7 +85,6 @@ const VeterinaryPublications = () => {
                 return (
                   <tr key={pendingPub._id}>
                     <th scope="row">{index + 1}</th>
-                    <td>{pendingPub.veterinary.vet}</td>
                     <td>{pendingPub.title}</td>
                     <td>
                       <Button
@@ -99,16 +104,10 @@ const VeterinaryPublications = () => {
                       />
                     </td>
                     <td>
-                      <button
-                        className="btn-primary w-100"
-                        onClick={() => handleShow(pendingPub._id, index, 'Aceptar')}>
-                        Aceptar
-                      </button>
-                      <button
-                        className="btn-danger w-100"
-                        onClick={() => handleShow(pendingPub._id, index, 'Rechazar')}>
-                        Rechazar
-                      </button>
+                      <span>{pendingPub.state}</span>
+                    </td>
+                    <td>
+                      <span>{formatDate(pendingPub.updatedAt)}</span>
                     </td>
                   </tr>
                 );
@@ -136,4 +135,10 @@ const VeterinaryPublications = () => {
   );
 };
 
-export default withRouter(VeterinaryPublications);
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(VeterinaryPublications));

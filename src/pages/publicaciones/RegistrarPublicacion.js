@@ -144,9 +144,10 @@ const RegistrarPublicacion = (props) => {
   );
 };
 
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
   return {
     userReducer:state.userReducer,
-  }
-}
+  };
+};
+
 export default connect(mapStateToProps)(withRouter(RegistrarPublicacion));
