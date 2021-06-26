@@ -114,7 +114,7 @@ const RegistrarPublicacion = (props) => {
         />
          <br />
          <label htmlFor="username">Agregar Imagen</label>
-          <input type="file" accept="image/jpeg" placeholder="Ingrese imagen" onChange={({target})=>handleFileChange(target.files[0])}/>
+          <input type="file" accept="image/jpeg" placeholder="Ingrese imagen" onChange={({target})=>handleFileChange(target.files[0],"")}/>
 
           { 
             previewSource && <img
