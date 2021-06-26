@@ -17,7 +17,7 @@ const Publicaciones = (props) => {
   useEffect(() => {
     setPublicationsFiltered(()=>{
       return publications.filter((pub)=>{
-        return  pub.title.toLowerCase().includes(textFilter) || pub.description.toLowerCase().includes(textFilter) || pub.veterinary.vet.toLowerCase().includes(textFilter);
+        return  pub.title.toLowerCase().includes(textFilter.toLowerCase()) || pub.description.toLowerCase().includes(textFilter.toLowerCase()) || pub.veterinary.vet.toLowerCase().includes(textFilter.toLowerCase());
       });
     });
   }, [textFilter])

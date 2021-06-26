@@ -6,7 +6,7 @@ import { getVeterinary } from '../../api/BackendConnection/CrudVeterinary';
 
 const { useState, useEffect } = React;
 
-const infoVeterinario = (props) => {
+const InfoVeterinario = (props) => {
   const [veterinary,setVeterinary] = useState(null);
   let { id } = useParams();
 
@@ -67,4 +67,4 @@ const infoVeterinario = (props) => {
   );
 };
 
-export default withRouter(infoVeterinario);
+export default withRouter(InfoVeterinario);

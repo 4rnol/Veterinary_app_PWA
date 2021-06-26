@@ -2,7 +2,7 @@ import * as React from 'react';
 import './RegistrarVeterinario.css';
 import { useFiles } from '../../utils/validations/formValidations/useFiles';
 import { projectStorage } from '../../api/Firebase/config';
-import { useFullName as useName}  from '../../utils/validations/formValidations/useNameForm';
+import { useFullName as useName } from '../../utils/validations/formValidations/useNameForm';
 import { useFullName as useLastName } from '../../utils/validations/formValidations/useNameForm';
 import { useFullName as useNameVeterinary } from '../../utils/validations/formValidations/useNameForm';
 import { useFullName as useDireccion } from '../../utils/validations/formValidations/useNameForm';
@@ -10,13 +10,12 @@ import { usePassword } from '../../utils/validations/formValidations/usePassword
 import { usePassword as usePassConfirm } from '../../utils/validations/formValidations/usePasswordForm';
 import { usePhone } from '../../utils/validations/formValidations/usePhoneNumberForm';
 import CrudVeterinary from '../../api/BackendConnection/CrudVeterinary';
-import {useEmail} from '../../utils/validations/formValidations/useEmailForm';
+import { useEmail } from '../../utils/validations/formValidations/useEmailForm';
 import img from '../../assets/Dopi.jpg';
 import { routes } from '../../router/RoutesConstants';
-import { Button ,Modal, ModalHeader, ModalFooter, ModalTitle } from 'react-bootstrap';
+import { Button, Modal, ModalHeader, ModalFooter, ModalTitle } from 'react-bootstrap';
 
-
-const {useState, useEffect} = React;
+const { useState, useEffect } = React;
 const RegistrarVeterinario = (props) => {
   const [show, setShow] = useState(false);
 
@@ -24,41 +23,60 @@ const RegistrarVeterinario = (props) => {
   const handleShow = () => setShow(true);
 
   const [file, handleFileChange, fileError, setFileError, fileMessage, setFileMessage, previewSource] = useFiles();
-  const [usrName, handleUserNameChange, userNameError, setUserNameError, userNameMesasge, setUserNameMessage] = useName(3,25);
-  const [lastName, handleLastNameChange, lastNameError, setLastNameError, lastNameMesasge, setLastNameMessage] = useLastName(3,25);
-  const [veterinary, handleVeterinaryChange, veterinaryError, setVeterinaryError, veterinaryMesasge, setVeterinaryMessage] = useNameVeterinary(3,25);
-  const [direccion, handleDireccionChange, direccionError, setDireccionError, direccionMesasge, setDireccionMessage] = useDireccion(3,25);
+  const [usrName, handleUserNameChange, userNameError, setUserNameError, userNameMesasge, setUserNameMessage] = useName(
+    3,
+    25,
+  );
+  const [lastName, handleLastNameChange, lastNameError, setLastNameError, lastNameMesasge, setLastNameMessage] =
+    useLastName(3, 25);
+  const [
+    veterinary,
+    handleVeterinaryChange,
+    veterinaryError,
+    setVeterinaryError,
+    veterinaryMesasge,
+    setVeterinaryMessage,
+  ] = useNameVeterinary(3, 25);
+  const [direccion, handleDireccionChange, direccionError, setDireccionError, direccionMesasge, setDireccionMessage] =
+    useDireccion(3, 25);
   const [password, handlePassChange, passwordError, setPasswordError, passMessage, setPassMessage] = usePassword();
-  const [passwordConfirm, handlePasswordConfirmChange, passwordConfirmError, setPasswordConfirmError, passwordConfirmMesasge, setPasswordConfirmMessage] = usePassConfirm();
+  const [
+    passwordConfirm,
+    handlePasswordConfirmChange,
+    passwordConfirmError,
+    setPasswordConfirmError,
+    passwordConfirmMesasge,
+    setPasswordConfirmMessage,
+  ] = usePassConfirm();
   const [phone, handlePhoneChange, phoneError, setPhoneError, phoneErrorMessage, setPhoneErrorMessage] = usePhone();
   const [email, handleEmailChange, emailError, setEmailError, emailMessage, setEmailMessage] = useEmail();
-  const [modalOpen,setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(true);
 
   const registrar = (e) => {
     e.preventDefault();
-    if(password===passwordConfirm){
-    const storageRef = projectStorage.ref(`Veterinary/${file.name}`);
-    storageRef.put(file).on(
-      'state_changed',
-      () => {},
-      (err) => {
-        console.log('error' + err);
-      },
-      async () => {
-        await storageRef.getDownloadURL().then((url) => {
-          CrudVeterinary.createVeterinary(usrName,lastName,veterinary,email,phone,direccion,url,password)
-          .then(resp=>{
-              props.history.push(routes.login);
-          })
-          .catch(err=>{
-            console.warn(err);
-          })
-        });
-      },
-    );
-    }else{
-      const confirm_password = document.getElementById("confirm_password");
-      confirm_password.setCustomValidity("Contraseñas no coninciden");
+    if (password === passwordConfirm) {
+      const storageRef = projectStorage.ref(`Veterinary/${file.name}`);
+      storageRef.put(file).on(
+        'state_changed',
+        () => {},
+        (err) => {
+          console.log('error' + err);
+        },
+        async () => {
+          await storageRef.getDownloadURL().then((url) => {
+            CrudVeterinary.createVeterinary(usrName, lastName, veterinary, email, phone, direccion, url, password)
+              .then((resp) => {
+                props.history.push(routes.login);
+              })
+              .catch((err) => {
+                console.warn(err);
+              });
+          });
+        },
+      );
+    } else {
+      const confirm_password = document.getElementById('confirm_password');
+      confirm_password.setCustomValidity('Contraseñas no coninciden');
     }
   };
   return (
@@ -68,7 +86,7 @@ const RegistrarVeterinario = (props) => {
         <div id="scroll">
           <h1>Registro Veterinario</h1>
           <br />
-          <form onSubmit={(event)=>registrar(event)}>
+          <form onSubmit={(event) => registrar(event)}>
             <label htmlFor="username">Nombres:</label>
             <input
               type="text"
@@ -78,7 +96,7 @@ const RegistrarVeterinario = (props) => {
               pattern="[A-Z a-z]+"
               minLength="3"
               maxLength="25"
-              onChange={({target})=>handleUserNameChange(target.value)}
+              onChange={({ target }) => handleUserNameChange(target.value)}
             />
             <br />
             <label htmlFor="username">Apellido:</label>
@@ -89,7 +107,7 @@ const RegistrarVeterinario = (props) => {
               required
               minLength="3"
               maxLength="25"
-              onChange={({target})=>handleLastNameChange(target.value)}
+              onChange={({ target }) => handleLastNameChange(target.value)}
             />
             <br />
             <label htmlFor="email">Correo Electrónico:</label>
@@ -100,7 +118,7 @@ const RegistrarVeterinario = (props) => {
               required
               minLength="15"
               maxLength="50"
-              onChange={({target})=>handleEmailChange(target.value)}
+              onChange={({ target }) => handleEmailChange(target.value)}
             />
             <br />
             <label htmlFor="phone">Teléfono:</label>
@@ -111,9 +129,9 @@ const RegistrarVeterinario = (props) => {
               required
               pattern="[1-9]+"
               maxLength="7"
-              min = "60000000"
-              max = "80000000"
-              onChange={({target})=>handlePhoneChange(target.value)}
+              min="60000000"
+              max="80000000"
+              onChange={({ target }) => handlePhoneChange(target.value)}
             />
             <br />
             <label htmlFor="password">Contraseña:</label>
@@ -125,7 +143,7 @@ const RegistrarVeterinario = (props) => {
               id="password"
               minLength="5"
               maxLength="25"
-              onChange={({target})=>handlePassChange(target.value)}
+              onChange={({ target }) => handlePassChange(target.value)}
             />
             <br />
             <label htmlFor="password">Confirmar contraseña:</label>
@@ -133,11 +151,11 @@ const RegistrarVeterinario = (props) => {
               type="password"
               className="input-registrarVeterinario"
               placeholder="Confirmar Contraseña"
-              id="confirm_password" 
+              id="confirm_password"
               required
               minLength="5"
               maxLength="25"
-              onChange={({target})=>handlePasswordConfirmChange(target.value)}
+              onChange={({ target }) => handlePasswordConfirmChange(target.value)}
             />
             <br />
             <label htmlFor="username">Nombre de Veterinaria:</label>
@@ -147,7 +165,7 @@ const RegistrarVeterinario = (props) => {
               placeholder="Ingrese nombre"
               minLength="3"
               maxLength="25"
-              onChange={({target})=>handleVeterinaryChange(target.value)}
+              onChange={({ target }) => handleVeterinaryChange(target.value)}
             />
             <br />
             <label htmlFor="direction">Dirección:</label>
@@ -157,7 +175,7 @@ const RegistrarVeterinario = (props) => {
               placeholder="Ingrese Direccion"
               minLength="3"
               maxLength="25"
-              onChange={({target})=>handleDireccionChange(target.value)}
+              onChange={({ target }) => handleDireccionChange(target.value)}
             />
             <label htmlFor="username">Agregar Imagen:</label>
             <input
@@ -168,19 +186,19 @@ const RegistrarVeterinario = (props) => {
               onChange={({ target }) => handleFileChange(target.files[0])}
             />
 
-            {
-              previewSource !=="" && <img href="img" alt="" src={previewSource} width='100%' height="220px"/>
-            }
-            <button type="submit"  onClick={handleShow}>Registrar</button>
-            <Modal  centered  size='lg' className="modalPublicacion" show={show} onHide={handleClose}>
-          <Modal.Title >Aviso</Modal.Title>
-        <Modal.Body>Registro Exitoso.</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary"  onClick={handleClose} >
-            Aceptar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+            {previewSource !== '' && <img href="img" alt="" src={previewSource} width="100%" height="220px" />}
+            <button type="submit" onClick={handleShow}>
+              Registrar
+            </button>
+            <Modal centered size="lg" className="modalPublicacion" show={show} onHide={handleClose}>
+              <Modal.Title>Aviso</Modal.Title>
+              <Modal.Body>Registro Exitoso.</Modal.Body>
+              <Modal.Footer>
+                <Button variant="primary" onClick={handleClose}>
+                  Aceptar
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </form>
         </div>
       </div>

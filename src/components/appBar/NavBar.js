@@ -105,6 +105,15 @@ const NavBar =(props)=>{
               </div>
           }            
           {
+            isAuth && 
+              <div>
+                <Nav.Link onClick={()=>redirect(routes.veterinaryPublications)}>
+                  <li>Mis publicaciones</li>
+                </Nav.Link>
+                <hr />
+              </div>
+          }            
+          {
             user!==null&&((isAuth && user.email==='admin@admin.com') &&
               <div>
                 <Nav.Link onClick={()=>redirect(routes.checkPub)}>
