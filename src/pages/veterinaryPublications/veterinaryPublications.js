@@ -1,14 +1,12 @@
 import * as React from 'react';
-import './styles.css';
-import { getPendingPublications } from '../../api/BackendConnection/servicePublications';
-import { updatePublicationState } from '../../api/BackendConnection/servicePublications';
-import img from '../../assets/Dopi.jpg';
-import Publicacion from '../verPublicaciones/Publicacion';
+import { withRouter } from 'react-router';
 import { Button, Overlay, Popover, Modal } from 'react-bootstrap';
+import img from '../../assets/Dopi.jpg';
+import { getPendingPublications } from '../../api/BackendConnection/servicePublications';
 
-const { useEffect, useState, useRef } = React;
+const { useState, useEffect, useRef } = React;
 
-const CheckPendingPublications = () => {
+const VeterinaryPublications = () => {
   const [pendingPublication, setPendingPublications] = useState([]);
   const [openImg, setOpenImg] = useState(false);
   const [modalImgSrc, setModalImgSrc] = useState('');
@@ -21,19 +19,16 @@ const CheckPendingPublications = () => {
   const [actionType, setActionType] = useState('');
   const ref = useRef(null);
 
-  console.log(pendingPublication);
   useEffect(() => {
-    const fetchPublications=async()=> {
-      console.log("entra")
+    (async function () {
       try {
         const resp = await getPendingPublications();
-        await setPendingPublications(resp);
+        setPendingPublications(resp);
       } catch (err) {
         console.warn(err);
       }
-    }
-    pendingPublication.length===0 && fetchPublications()
-  }, [pendingPublication]);
+    })();
+  }, []);
 
   const popUpImg = (srcImg = '') => {
     setOpenImg((prev) => {
@@ -42,36 +37,9 @@ const CheckPendingPublications = () => {
     });
   };
 
-  const acceptPublication = async () => {
-    try {
-      await updatePublicationState('Aceptado', publicationSelected);
-      setPendingPublications((prev) => {
-        prev.splice(indexPubSelected, 1);
-        return [...prev];
-      });
-      setShowModal(false);
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
   const handleClose=()=>{
     setShowModal(false);
   };
-
-  const rejectPublication = async () => {
-    try {
-      await updatePublicationState('Rechazado', publicationSelected);
-      setPendingPublications((prev) => {
-        prev.splice(indexPubSelected, 1);
-        return [...prev];
-      });
-      setShowModal(false);
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
 
   const handleShow = (idPublication, index, action) => {
     setPublicationSelected(idPublication);
@@ -90,7 +58,7 @@ const CheckPendingPublications = () => {
     <div className="checkPub-section">
       <img className="img-detras" src={img} alt="" />
       <div className="title-PendingPubBox">
-        <h2 className="title-pendingPub">Publicaciones Pendientes</h2>
+        <h2 className="title-pendingPub">Mis Publicaciones</h2>
       </div>
       <div className="table-responsive">
         <table className="table table-dark table-striped">
@@ -148,26 +116,6 @@ const CheckPendingPublications = () => {
           </tbody>
         </table>
 
-        <Modal show={showModal} centered onHide={handleClose}>
-          <Modal.Header>
-            <Modal.Title>Esta seguro que desea {actionType} la publicacion</Modal.Title>
-          </Modal.Header>
-          <Modal.Footer>
-            <Button variant="primary" style={{width:"7rem"}} onClick={handleClose}>
-              Cerrar
-            </Button>
-            { actionType==="Aceptar" ? 
-              <Button variant="primary" style={{width:"7rem"}} className="bg-success" onClick={acceptPublication}>
-                Aceptar
-              </Button>
-              :
-              <Button variant="primary" style={{width:"7rem"}} className="bg-danger" onClick={rejectPublication}>
-                Rechazar
-              </Button>
-            }
-          </Modal.Footer>
-        </Modal>
-
         <Overlay show={show} target={target} placement="bottom" container={ref.current} containerPadding={20}>
           <Popover id="popover-contained">
             <Popover.Title as="h3">Descripcion</Popover.Title>
@@ -188,4 +136,4 @@ const CheckPendingPublications = () => {
   );
 };
 
-export default CheckPendingPublications;
+export default withRouter(VeterinaryPublications);

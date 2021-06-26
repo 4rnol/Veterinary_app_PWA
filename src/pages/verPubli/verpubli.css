@@ -61,6 +61,7 @@
 .seccion-perfil-usuario .perfil-usuario-bio {
     margin-bottom: 1.25rem;
     text-align: center;
+    word-break: break-all;
 }
 
 .seccion-perfil-usuario .lista-datos {

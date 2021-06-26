@@ -12,4 +12,5 @@ export const routes ={
     publication:'/publications/:id/publication',
     veterinaryInfo:'/veterinary/:id/info',
     accountVeterinary:'/accountVeterinary/:id',
+    veterinaryPublications:'/veterinaryPublications',
 };

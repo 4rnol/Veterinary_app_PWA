@@ -18,7 +18,7 @@ const {useState, useEffect} =React;
 const RegistrarPublicacion = (props) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () =>       props.history.push(routes.publications);
   const handleShow = () => setShow(true);
 
   const{user}=props.userReducer;
@@ -50,7 +50,9 @@ const RegistrarPublicacion = (props) => {
   ] = useDecription(10,30);
 
   const [category,setCategory] = useState("");
-
+  useEffect(() => {
+    setCategory("Cuidado alimenticio");
+  }, [])
   const registrar=(e)=>{
     e.preventDefault();
     if(previewSource===""){
@@ -72,7 +74,7 @@ const RegistrarPublicacion = (props) => {
   const savePub=async(imgLink)=>{
     try{
       await postPublication(title,category,description,imgLink,user._id);
-      props.history.push(routes.publications);
+      handleShow();
     }catch(err){
       console.warn(err);
     }
@@ -85,10 +87,10 @@ const RegistrarPublicacion = (props) => {
      <form onSubmit={(e)=>registrar(e)}>
         <h1>Registrar Publicacion</h1>        
           <br />
-          <label htmlFor="username">Titulo</label>
+          <label htmlFor="username">Titulo*</label>
           <input type="text" placeholder="Ingrese Titulo" minLength="3" maxLength="25" required onChange={({target})=>handleTitleChange(target.value)}/>
          <br />
-          <label htmlFor="Categoria">Categoria</label>
+          <label htmlFor="Categoria">Categoria*</label>
           <br />
           <select name="Categoria" onChange={({target})=>setCategory(target.value)}>
             <option value="Cuidado alimenticio">Cuidado Alimenticio</option> 
@@ -96,7 +98,7 @@ const RegistrarPublicacion = (props) => {
             <option value="Vacunas">Vacunas</option>
           </select>
           <br />
-          <label className="label-registrar-textarea" required>Descripcion</label>
+          <label className="label-registrar-textarea" required>Descripcion*</label>
         <textarea  
           rows="20" 
           name="comment[text]" 
@@ -122,7 +124,7 @@ const RegistrarPublicacion = (props) => {
               src={previewSource}
             />
           }
-          <button type="submit" onClick={handleShow}>Solicitar Publicacion</button>
+          <button type="submit">Solicitar Publicacion</button>
 
           <Modal  centered  size='lg' className="modalPublicacion" show={show} onHide={handleClose}>
           <Modal.Title >Aviso</Modal.Title>
